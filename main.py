@@ -248,6 +248,8 @@ def main_path(pathstr):
 	# FIXME: handle ?part=#.#.#&filename=string
 	# and then convert sub_showmsg et al to use the same notation
 	global ctxt
+	if not config.allowraw:
+		die(ctxt, "Downloading raw messages is administratively prohibited.")
 	while pathstr[0] == '/':
 		pathstr = pathstr[1:]
 	path = pathstr.split('/')
@@ -321,6 +323,7 @@ def main():
 	ctxt[TZ] = ''
 	# Update with defaults from the config
 	ctxt.update(config.defaults)
+	ctxt[ALLOWRAW] = config.allowraw
 	# Update with all cookies
 	for c in Cookie.SimpleCookie(os.environ.get('HTTP_COOKIE', '')).values():
 		ctxt[c.key] = c.value

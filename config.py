@@ -1,5 +1,9 @@
 from globals import *
 
+# Set this to non-zero to allow the raw message bodies to be downloaded,
+# complete with all attachments and email addresses intact.
+allowraw = 0
+
 # Values are looked up in the following order:
 # 1. CGI environment variables
 # 2. Hard-coded defaults

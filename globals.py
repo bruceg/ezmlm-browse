@@ -1,4 +1,5 @@
 ALLOWPOST = intern('allowpost')
+ALLOWRAW = intern('allowraw')
 ALTPART = intern('alt_part')
 AUTHORID = intern('authorid')
 AUTHOR = intern('author')

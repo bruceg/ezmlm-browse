@@ -1,7 +1,3 @@
-- config additions:
-  - Totally disable raw message download
-  - CSS directory
-
 - Handle time zones.
 
 - Make ezmlm also return previous and next message numbers.
