@@ -48,6 +48,9 @@ atom = Feed('application/atom+xml',
   </author>
   <issued>%(isogmtime(timestamp))s</issued>
   <modified>%(isogmtime(timestamp))s</modified>
+  <content><pre>From: %(html(author))s
+
+%(html(mask_email(body)))s</pre></content>
  </entry>
 ''',
 '''</feed>
@@ -67,7 +70,9 @@ rss2 = Feed('application/rss+xml',
    <title>%(html(subject))s</title>
    <link>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</link>
    <pubDate>%(rfc822gmtime(timestamp))s</pubDate>
-   <description>From: %(html(author))s</description>
+   <description>&lt;pre&gt;From: %(html(author))s
+
+%(html(mask_email(body)))s&lt;/pre&gt;</description>
    <guid>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</guid>
   </item>
 ''',
