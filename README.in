@@ -22,7 +22,7 @@ Development versions of @PACKAGE@ are available via Subversion at:
 
 Requirements:
 
-- Python (tested with 1.5.2, should work with any later version)
+- Python 2 (tested with 2.3, should work with version 2.2 or later)
 - ezmlm 0.53 + idx 0.40 or later.  If you are using an older version of
   ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" command on all
   lists you wish to browse.
