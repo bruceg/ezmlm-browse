@@ -78,9 +78,9 @@ def footer(ctxt):
 ###############################################################################
 def die(ctxt, msg):
 	ctxt['message'] = msg
-	header('Error', 'error')
+	header(ctxt, 'Error', 'error')
 	write(html('error') % ctxt)
-	footer()
+	footer(ctxt)
 
 def diesys(ctxt, a, b):
 	ctxt['message'] = a
