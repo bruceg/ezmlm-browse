@@ -8,6 +8,8 @@ H1 {
 HR { display: none; }
 TH { background: #adbbd8; }
 
+.versioninfo { font-size: small; }
+
 .evenrow { background: #dadfef; }
 .oddrow { background: #c6d0e7; }
 

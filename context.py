@@ -24,6 +24,7 @@ global_context = {
     'random': __import__('random'),
     're': __import__('re'),
     'time': __import__('time'),
+    'version': __import__('version'),
     }
 
 class Context:

@@ -9,6 +9,8 @@ HR { display: none; }
 
 TH { background: #9189a0; }
 
+.versioninfo { font-size: small; }
+
 .evenrow { background: #c8c2d3; }
 .oddrow { background: #a9a3b4; }
 

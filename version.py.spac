@@ -1,0 +1,6 @@
+: VERSION
+( \
+  echo program = \"`head -n 1 VERSION | cut -d' ' -f1`\"; \
+  echo version = \"`head -n 1 VERSION | cut -d' ' -f2`\"; \
+  echo full = \"`head -n 1 VERSION`\"; \
+) >$@
