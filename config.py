@@ -25,6 +25,12 @@ defaults = {
 	PERPAGE: 20,
 	# The number of messages per page.
 	MSGSPERPAGE: 10,
+	# The default stylesheet prefix. Note: The stylesheets cannot reside
+	# in your cgi-bin directory, they must be placed your normal htdocs
+	# directory. If the stylesheets are placed in your root htdocs dir,
+	# CSSPREFIX should be '/'. If you specify a subdirectory, make sure
+	# you place the trailing '/' (slash) character.
+	CSSPREFIX: '/stylesheets/',
 }
 
 # The base directory under which all of the mailing lists can be found.

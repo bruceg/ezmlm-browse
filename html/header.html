@@ -2,7 +2,7 @@
 <html>
 <head>
 %(iif(style and style <> "None",
-      '<link href="%s" rel="stylesheet" type="text/css">'%style))s
+      '<link href="%s%s" rel="stylesheet" type="text/css">'%(cssprefix,style)))s
 <title>%(iif(list, list+": "))s%(title)s</title>
 <meta NAME="robots" CONTENT="noindex">
 <meta NAME="robots" CONTENT="nofollow">

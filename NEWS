@@ -1,6 +1,9 @@
 -------------------------------------------------------------------------------
 Changes in version 0.10
 
+- Added CSSPREFIX configuration item, to allow for easy configuration of
+  where CSS files are located.  Thanks Roger Merchberger
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
