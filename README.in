@@ -16,7 +16,6 @@ To subscribe, send an email to:
 A mailing list archive is available at:
 	http://lists.untroubled.org/?list=bgware
 
-
 Development versions of @PACKAGE@ are available via Subversion at:
 	svn://bruce-guenter.dyndns.org/@PACKAGE@/trunk
 
@@ -29,17 +28,20 @@ Requirements:
 
 Installation:
 
-- Unpack ezmlm-browse into a non-web-visible directory.
-- Set conf-home to the directory from which ezmlm-browse will execute.
-- Run "make" to build ezmlm-browse and precompile the Python bytecode.
+- Unpack ezmlm-browse into a non-web-visible directory.  This is the
+  directory from which ezmlm-browse will execute.
+- Run "make" to build "wrapper" and precompile the Python bytecode.
 - Either copy the "wrapper" program or symlink the "index.cgi" script
   into your web tree as a CGI.
 - If necessary, make the wrapper setuid to whatever user owns the
   mailing list archive files.
+- Copy the .css files into a web-visible directory.
 
 Configuration:
 
-- Edit config.py to declare which mailing lists are visible to the web.
+- Edit config.py to declare which mailing lists are visible to the web,
+  and set the other defaults as appropriate (most notably, the path to
+  the CSS files).
 
 Security Notes:
 
