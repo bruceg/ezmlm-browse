@@ -8,7 +8,7 @@ def rec_gettext(part):
 		return '\n'.join([ rec_gettext(p)
 						   for p in part.get_payload() ])
 	if part.get_type('text/plain') == 'text/plain':
-		return part.get_payload()
+		return part.get_payload(decode=1)
 	return ''
 
 ###############################################################################
