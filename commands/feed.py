@@ -19,7 +19,7 @@ feedtypes = {
  <link rel="alternate"
        type="text/html"
        href="%(html(absurl(list=list)))s"/>
- <modified>%(now)s</modified>
+ <modified>%(time.strftime("%Y-%m-%dT%H:%M:%S",time.gmtime(timestamp)))s</modified>
  <author>
   <name>%(listemail)s</name>
  </author>
@@ -37,18 +37,13 @@ feedtypes = {
   <author>
    <name>%(author)s</name>
   </author>
-  <issued>%(isotime)s</issued>
-  <modified>%(isotime)s</modified>
+  <issued>%(time.strftime("%Y-%m-%dT%H:%M:%S",time.gmtime(timestamp)))s</issued>
+  <modified>%(time.strftime("%Y-%m-%dT%H:%M:%S",time.gmtime(timestamp)))s</modified>
  </entry>
 ''',
 '''</feed>
 '''),
 	}
-
-def fmttime(t=None):
-	if not t:
-		t = time.time()
-	return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(t))
 
 ###############################################################################
 # Command: Generate news feed
@@ -57,18 +52,20 @@ def do(ctxt):
 	feedtype = feedtypes[ctxt[FEEDTYPE]]
 	# Set a hard maximum on the number of messages to reduce DoS attacks
 	count = min(int(ctxt[FEEDMSGS]), 100)
-	ctxt['now'] = fmttime()
-	write(feedtype.header % ctxt)
 	num = ctxt[EZMLM].num
-	ctxt.push()
-	while count > 0 and num > 0:
+	msgs = []
+	while len(msgs) < count and num > 0:
 		try:
-			ctxt.update(ctxt[EZMLM].index[num])
-			ctxt['isotime'] = fmttime(ctxt[TIMESTAMP])
-			write(feedtype.entry % ctxt)
-			count -= 1
+			msgs.append(ctxt[EZMLM].index[num])
 		except KeyError:
 			pass
 		num -= 1
+	ctxt['timestamp'] = msgs[0][TIMESTAMP]
+	write(feedtype.header % ctxt)
+	num = ctxt[EZMLM].num
+	ctxt.push()
+	for msg in msgs:
+		ctxt.update(msg)
+		write(feedtype.entry % ctxt)
 	ctxt.pop()
 	write(feedtype.footer % ctxt)
