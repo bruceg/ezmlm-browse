@@ -28,6 +28,7 @@ RPMUPLOAD = [
 # Set LISTS to the mailing list(s) to send the announcement to
 LISTS = [
 	'bgware@lists.untroubled.org',
+	'ezmlm@list.cr.yp.to',
 	]
 
 # Run any extra commands to prepare the source tree (such as making
