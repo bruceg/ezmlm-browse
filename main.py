@@ -198,6 +198,9 @@ def monthname(number):
 		number %= 100
 	return ezmlm.month_names[number]
 
+def isogmtime(ts):
+	return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(float(ts)))
+
 def update_global_context():
 	context.global_context.update({
 		'absurl': absurl,
@@ -206,6 +209,7 @@ def update_global_context():
 		'defined': defined,
 		'format_timestamp': lambda msg:format_timestamp(ctxt, msg),
 		'iif': iif,
+		'isogmtime': isogmtime,
 		'html': escape_html,
 		'markup_urls': markup_urls,
 		'mask_email': mask_email,
