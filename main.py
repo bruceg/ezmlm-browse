@@ -119,8 +119,16 @@ def relurl(**kw):
 	kw = map(lambda val:"%s=%s"%(val[0],escape_url(str(val[1]))), kw)
 	return '?%s' % ('&'.join(kw))
 
+def absurl(**kw):
+	global ctxt
+	return ''.join(('http://',
+					ctxt['SERVER_NAME'],
+					ctxt['SCRIPT_NAME'],
+					apply(relurl, (), kw)))
+
 def relink(text, classname, **kw):
-	return '<a class="%s" href="?%s">%s</a>' % (classname, relurl(kw), text)
+	return '<a class="%s" href="?%s">%s</a>' % (
+		classname, apply(relurl, (), kw), text)
 
 def cmdlink(text, classname, command, **kw):
 	global ctxt
@@ -192,6 +200,7 @@ def monthname(number):
 
 def update_global_context():
 	context.global_context.update({
+		'absurl': absurl,
 		'cmdlink': cmdlink,
 		'config': config,
 		'defined': defined,
