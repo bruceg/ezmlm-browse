@@ -1,4 +1,7 @@
 -------------------------------------------------------------------------------
+Changes in version 0.9
+
+-------------------------------------------------------------------------------
 Changes in version 0.8
 
 - Rewrote the front-end from scratch, separating content generation from
