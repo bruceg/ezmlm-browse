@@ -38,7 +38,7 @@ defaults = {
 	# The default maximum line length to allow when doing word wrapping.
 	WRAPWIDTH: 0,
 	# The default type of syndication feed to produce.
-	# Only "atom" feeds exist at the moment.
+	# This may be set to 'atom', 'rss', or 'rss2' (aliased to 'rss').
 	FEEDTYPE: 'atom',
 	# The number of messages to put into a feed.
 	FEEDMSGS: 10,

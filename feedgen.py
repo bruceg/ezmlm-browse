@@ -53,6 +53,30 @@ atom = Feed('application/atom+xml',
 '''</feed>
 ''')
 
+rss2 = Feed('application/rss+xml',
+'''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+ <channel>
+  <title>%(listdesc)s</title>
+  <link>%(html(absurl(list=list)))s</link>
+  <description>%(listdesc)s</description>
+  <lastBuildDate>%(rfc822gmtime(timestamp))s</lastBuildDate>
+  <generator>%(version.full)s</generator>
+''',
+'''  <item>
+   <title>%(subject)s</title>
+   <link>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</link>
+   <pubDate>%(rfc822gmtime(timestamp))s</pubDate>
+   <description>From: %(author)s</description>
+   <guid>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</guid>
+  </item>
+''',
+''' </channel>
+</rss>
+''')
+
 types = {
 	'atom': atom,
+	'rss': rss2,
+	'rss2': rss2,
 	}

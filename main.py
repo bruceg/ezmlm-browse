@@ -201,6 +201,10 @@ def monthname(number):
 def isogmtime(ts):
 	return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(float(ts)))
 
+def rfc822gmtime(ts):
+	return time.strftime('%a, %d %b %Y %H:%M:%S GMT',
+						 time.gmtime(float(ts)))
+
 def update_global_context():
 	context.global_context.update({
 		'absurl': absurl,
@@ -222,6 +226,7 @@ def update_global_context():
 		'pagelink': pagelink,
 		'relink': relink,
 		'relurl': relurl,
+		'rfc822gmtime': rfc822gmtime,
 		'selectlist': selectlist,
 		'threadlink': threadlink,
 		'url': escape_url,
