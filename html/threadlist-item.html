@@ -1,0 +1,6 @@
+<tr class=%(iif(row%2, "even", "odd"))srow>
+<td class=msgcount>[%(msgcount)d]</td>
+<td class=subject>%(subject)s</td>
+<td>%(cmdlink("[Thread]", "threadlink", "threadindex",threadid=threadid,month=month))s</td>
+<td>%(cmdlink("[Messages]", "msgslink", "showthread",threadid=threadid,month=month))s</td>
+</tr>

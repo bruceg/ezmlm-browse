@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+Changes in version 0.8
+
+- Rewrote the front-end from scratch, separating content generation from
+  the HTML templates.  This means less flexability in the templates, but
+  faster code and easier maintenance and templating.
+- Now has author indices, paging, more links, time zone management,
+  style configuration, and other features I've forgotten.
+- The default template is marked up with CSS classes in many places, and
+  three sample style sheets are included.
+-------------------------------------------------------------------------------
+Changes in version 0.6
+
+- Fixed a bug in EzmlmArchive.month.
+- Added new built-in functions for producing relative links in the
+  templates: relink and cmdlink.
+- Rewrote the templates to merge all the common header and footer data
+  into a single file.
+- Added a parse tree optimizer to the template system which removes body
+  elements consisting of a single node.
+- Pre-compile all template expressions before use to speed up looped
+  execution.
+-------------------------------------------------------------------------------
+Changes in version 0.5
+
+- Totally rebuild the template system, moving most of the actual
+  page-specific code into the template pages themselves.
+-------------------------------------------------------------------------------
+Changes in version 0.2
+
+- Added proper targets to build the compiled Python bytecode files.
+
+- Replaced the Python main routine with a C wrapper that is suitable for
+  installations where setuid operation is required.
+-------------------------------------------------------------------------------

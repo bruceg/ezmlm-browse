@@ -1,0 +1,58 @@
+<form method=get>
+<input type=hidden name=list value="%(list)s">
+<input type=hidden name=cmd value=configure>
+
+<table class=config>
+
+<tr>
+<td class=config-label>Lines per page:</td>
+<td class=config-value><input size=3 name=_perpage value=%(perpage)s></td>
+</tr>
+
+<tr>
+<td class=config-label>Messages per page:</td>
+<td class=config-value><input size=3 name=_msgsperpage value=%(msgsperpage)s></td>
+</tr>
+
+<tr>
+<td class=config-label>Style:</td>
+<td class=config-value>%(selectlist("_style", config.styles, style))s</td>
+</tr>
+
+<tr>
+<td class=config-label>Timezone:</td>
+<td class=config-value>%(selectlist("_tz", timezones, tz))s</td>
+</tr>
+
+<tr>
+<td class=config-label>Preferred time format:</td>
+<td class=config-value>%(selectlist("_format_time", [
+("None", "Do not convert time"),
+("%c", "Server default"),
+("%a, %d %b %Y %H:%M:%S", "Sun, 20 Jun 2003 23:21:36"),
+("%a %b %d %H:%M:%S %Y", "Sun Jun 20 23:21:05 1993"),
+("%Y-%m-%d %H:%M:%S", "1993-06-20 23:21:05"),
+], format_time))s</td>
+</tr>
+
+<tr>
+<td class=config-label>View multipart messages as:</td>
+<td class=config-value>%(selectlist("_alt_part", [
+('text/plain', 'Plain Text'),
+('text/html', 'HTML'),
+], alt_part))s</td>
+</tr>
+
+</table>
+
+<table border=0><tr>
+<td><input type=submit name="" value="Save Configuration"></td>
+<td><input type=reset value="Reset Values"></td>
+</table>
+
+</form>
+
+<p><b>Note:</b> These configuration settings are stored in cookies on
+your computer.  These cookies are used for no purpose other than local
+configuration.  No user or browser tracking is done through the cookies,
+and no cookie data is stored on this server.</p>

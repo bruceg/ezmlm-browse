@@ -1,0 +1,32 @@
+- Handle time zones.
+
+- Make ezmlm also return previous and next message numbers.
+
+- Figure out how to determine dates on the messages.
+  - Parse the first Received: line or the Date: line
+
+- Make a better front-end for sites that want to have the same
+  installation serve out multiple mailing list archives with different
+  owners.
+
+- Improve the install and configuration documentation.
+
+- Write template documentation.
+
+- Build a proper spec file.
+
+- Seperate the generic parts of the CGI front-end into another generic
+  library that uses the template library.
+
+- i18n
+
+-------------------------------------------------------------------------------
+Ideas from other implementations:
+
+List of posts by a given author (divided by month)
+Author index / searching
+Thread tree display
+Downloadable attachments
+"raw" message view
+Generation of RSS feeds
+Language customization

@@ -1,0 +1,9 @@
+<b>Subject:</b>
+<a href="mailto:%(listemail)s?subject=Re: %(subject)s">%(subject)s</a>
+<br><b>From:</b>
+%(cmdlink(html(mask_email(message['from'] or message['return-path'])),
+          "author", "author", author=authorid, month=month))s
+<br><b>Date:</b>
+%(timestr)s
+<br><b>Message-Id:</b> %(html(message['message-id'] or ''))s
+<br>

@@ -1,0 +1,5 @@
+<tr class=%(iif(row%2, "even", "odd"))srow>
+<td class=timestamp>%(timestr)s</td>
+<td>%(cmdlink(subject, "subject", "showmsg", msgnum=msgnum))s</td>
+<td>%(cmdlink(author, "author", "author", authorid=authorid))s</td>
+</tr>

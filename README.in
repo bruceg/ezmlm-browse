@@ -1,0 +1,62 @@
+ezmlm-browse
+Web browser for ezmlm-idx archives
+Bruce Guenter <bruceg@em.ca>
+Version @VERSION@
+@TODAY@
+
+This is ezmlm-browse, a web interface for browsing ezmlm-idx (version
+0.40 or later) archives.  The presentation is modeled from that of the
+ezmlm-cgi archive browser that is part of ezmlm-idx, but with several
+additions.  However, the output is completely template drive, so you can
+make it fit into your current web scheme.
+
+A mailing list has been set up to discuss this and other packages.
+To subscribe, send an email to:
+	bgware-subscribe@lists.untroubled.org
+A mailing list archive is available at:
+	http://lists.untroubled.org/?list=bgware
+
+
+Development versions of @PACKAGE@ are available via Subversion at:
+	svn://bruce-guenter.dyndns.org/@PACKAGE@/trunk
+
+Requirements:
+
+- Python (tested with 1.5.2, should work with any later version)
+- ezmlm 0.53 + idx 0.40 or later.  If you are using an older version of
+  ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" command on all
+  lists you wish to browse.
+
+Installation:
+
+- Unpack ezmlm-browse into a non-web-visible directory.
+- Set conf-home to the directory from which ezmlm-browse will execute.
+- Run "make" to build ezmlm-browse and precompile the Python bytecode.
+- Either copy the "wrapper" program or symlink the "index.cgi" script
+  into your web tree as a CGI.
+- If necessary, make the wrapper setuid to whatever user owns the
+  mailing list archive files.
+
+Configuration:
+
+- Edit config.py to declare which mailing lists are visible to the web.
+
+Security Notes:
+
+- You will need to choose one of the following options:
+
+  - Make your mailing list archives readable to the UID that the web
+    server operates under.  This will likely allow anybody on your
+    system to read the contents of the mailing lists, including the
+    unfiltered header lines (which include full email addresses, etc.)
+
+  - Make the wrapper CGI program owned by the mailing list archive owner
+    and setuid.  If I have not been adequately careful, this may allow
+    an attacker to execute code as that user.
+
+  - Use the Apache su-exec module.
+
+This program is Copyright(C) 2004 Bruce Guenter, and may be copied
+according to the GNU GENERAL PUBLIC LICENSE (GPL) Version 2 or a later
+version.  A copy of this license is included with this package.  This
+package comes with no warranty of any kind.

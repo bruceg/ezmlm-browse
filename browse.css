@@ -1,0 +1,69 @@
+BODY { background: #efeff7; color: #000000; }
+H1 {
+	background: #314a63;
+	color: #ffffff;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+HR { display: none; }
+TH { background: #adbbd8; }
+
+.evenrow { background: #dadfef; }
+.oddrow { background: #c6d0e7; }
+
+.author { }
+.listdesc { }
+.listlink { }
+.month { text-align: right; }
+.msgcount { font-family: monospace; text-align: center; }
+.msgsitem { border-style: groove; }
+.msgslink { }
+.note { }
+.subject { }
+.threaditem { border-width: thin; }
+.threadslink { }
+.timestamp { }
+.year { text-align: left; }
+
+/* Parts of the pager */
+.pager { background: #8598bf; text-align: center; }
+.pager-first { }
+.pager-prev { }
+.pager-curr { }
+.pager-next { }
+.pager-last { }
+
+/* Parts of the message menu */
+.msgmenu { background: #8598bf; width: 100%; }
+.msgmenu-prevbydate { }
+.msgmenu-nextbydate { }
+.msgmenu-prevbythread { }
+.msgmenu-nextbythread { }
+.msgmenu-label { text-align: right; white-space: nowrap; }
+.msgmenu-value { text-align: left; width: 99%; }
+
+/* Parts of the menu bar */
+.menubar { background: #adbbd8; }
+.menu-lists { }
+.menu-config { }
+.menu-first { }
+.menu-prev { }
+.menu-bythread { }
+.menu-bydate { }
+.menu-next { }
+.menu-last { }
+.menu-months { }
+.menu-search { }
+.menu-subscribe { }
+
+/* Configuration table */
+.config { }
+.config-label { text-align: right; }
+.config-value { text-align: left; }
+
+/* The list table classes */
+.lists { }
+.months { border: 0px; }
+.msglist { }
+.msgs { width: 100%; }
+.threadlist { }

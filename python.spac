@@ -1,0 +1,3 @@
+files = glob('*.py') + glob('*/*.py')
+files = map(lambda filename:filename[:-3]+'.pyc', files)
+dependon(files)

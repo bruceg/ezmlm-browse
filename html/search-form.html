@@ -1,0 +1,9 @@
+<form method=get>
+<input type=hidden name=cmd value=search>
+<input type=hidden name=list value="%(list)s">
+Terms: <input name=terms value="%(html(terms))s">
+<input type=submit name=submit value="Search %(list)s">
+<input type=reset>
+</form>
+<div class=note><b>Note:</b> The search function only examines the
+message subjects.  No full text search is available.</div>

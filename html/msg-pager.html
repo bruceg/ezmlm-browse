@@ -1,0 +1,23 @@
+<table class=msgmenu>
+
+<tr class=msgmenu-prevbydate>
+<td class=msgmenu-label>Previous by date:</td>
+<td class=msgmenu-value>%(iif(msgnum>1, "%(format_timestamp(ezmlm.index[msgnum-1]))s %(msgsubjlink(msgnum-1))s, %(msgauthlink(msgnum-1))s"))s</td>
+</tr>
+
+<tr class=msgmenu-nextbydate>
+<td class=msgmenu-label>Next by date:</td>
+<td class=msgmenu-value>%(iif(msgnum<ezmlm.num, "%(format_timestamp(ezmlm.index[msgnum+1]))s %(msgsubjlink(msgnum+1))s, %(msgauthlink(msgnum+1))s"))s</td>
+</tr>
+
+<tr class=msgmenu-prevbythread>
+<td class=msgmenu-label>Previous in thread:</td>
+<td class=msgmenu-value>%(iif(threadidx>0, "%(format_timestamp(messages[threadidx-1]))s %(msgsubjlink(messages[threadidx-1]))s, %(msgauthlink(messages[threadidx-1]))s"))s</td>
+</tr>
+
+<tr class=msgmenu-nextbythread>
+<td class=msgmenu-label>Next in thread:</td>
+<td class=msgmenu-value>%(iif(threadidx<threadlen-1, "%(format_timestamp(messages[threadidx+1]))s %(msgsubjlink(messages[threadidx+1]))s, %(msgauthlink(messages[threadidx+1]))s"))s</td>
+</tr>
+
+</table>

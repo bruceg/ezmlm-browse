@@ -1,0 +1,14 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+%(iif(style and style <> "None",
+      '<link href="%s" rel="stylesheet" type="text/css">'%style))s
+<title>%(iif(list, list+": "))s%(title)s</title>
+<meta NAME="robots" CONTENT="noindex">
+<meta NAME="robots" CONTENT="nofollow">
+<base href="%(base)s">
+</head>
+<body class=%(class)s-body>
+%(iif(menubar,menubar+"<hr>"))s
+<div class=%(class)s-title><h1>%(iif(list, list+": "))s%(title)s</h1></div>
+<hr>
