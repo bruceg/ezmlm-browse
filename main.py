@@ -104,7 +104,7 @@ def wordwrap(str):
 		out.append(line)
 	return '\n'.join(out)
 
-def relink(text, classname, **kw):
+def relurl(**kw):
 	# Put certain keywords in a fixed order
 	pre = []
 	for key in (LIST, COMMAND):
@@ -117,7 +117,10 @@ def relink(text, classname, **kw):
 	kw.sort()
 	kw = pre + kw
 	kw = map(lambda val:"%s=%s"%(val[0],escape_url(str(val[1]))), kw)
-	return '<a class="%s" href="?%s">%s</a>' % (classname, '&'.join(kw), text)
+	return '?%s' % ('&'.join(kw))
+
+def relink(text, classname, **kw):
+	return '<a class="%s" href="?%s">%s</a>' % (classname, relurl(kw), text)
 
 def cmdlink(text, classname, command, **kw):
 	global ctxt
@@ -205,6 +208,7 @@ def update_global_context():
 		'optlink': optlink,
 		'pagelink': pagelink,
 		'relink': relink,
+		'relurl': relurl,
 		'selectlist': selectlist,
 		'threadlink': threadlink,
 		'url': escape_url,
