@@ -3,6 +3,7 @@ Changes in version 0.9
 
 - Two bugfixes in the handling of month numbers from "Central Linux
   Experts And Newbies" via Gerrit Pape.
+- Some HTML template bugfixes.
 -------------------------------------------------------------------------------
 Changes in version 0.8
 
