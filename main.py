@@ -321,6 +321,7 @@ def main():
 	ctxt[WRAPWIDTH] = 0
 	ctxt[TERMS] = ''
 	ctxt[TZ] = ''
+	ctxt[CSSPREFIX] = ''
 	# Update with defaults from the config
 	ctxt.update(config.defaults)
 	ctxt[ALLOWRAW] = config.allowraw
