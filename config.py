@@ -37,6 +37,11 @@ defaults = {
 	CSSPREFIX: '',
 	# The default maximum line length to allow when doing word wrapping.
 	WRAPWIDTH: 0,
+	# The default type of syndication feed to produce.
+	# Only "atom" feeds exist at the moment.
+	FEEDTYPE: 'atom',
+	# The number of messages to put into a feed.
+	FEEDMSGS: 10,
 }
 
 # The base directory under which all of the mailing lists can be found.

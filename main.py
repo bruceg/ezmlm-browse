@@ -326,6 +326,9 @@ def main():
 	# Set up hard-coded defaults
 	ctxt[ALTPART] = 'text/plain'
 	ctxt[COMMAND] = 'months'
+	ctxt[CSSPREFIX] = ''
+	ctxt[FEEDMSGS] = 10
+	ctxt[FEEDTYPE] = 'atom'
 	ctxt[FORMATTIME] = ''
 	ctxt[LIST] = ''
 	ctxt[MSGSPERPAGE] = 10
@@ -334,7 +337,6 @@ def main():
 	ctxt[WRAPWIDTH] = 0
 	ctxt[TERMS] = ''
 	ctxt[TZ] = ''
-	ctxt[CSSPREFIX] = ''
 	# Update with defaults from the config
 	ctxt.update(config.defaults)
 	ctxt[ALLOWRAW] = config.allowraw
