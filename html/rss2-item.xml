@@ -1,0 +1,9 @@
+  <item>
+   <title>%(html(subject))s</title>
+   <link>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</link>
+   <pubDate>%(rfc822gmtime(timestamp))s</pubDate>
+   <description>&lt;pre&gt;From: %(html(author))s
+
+%(html(mask_email(body)))s&lt;/pre&gt;</description>
+   <guid>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</guid>
+  </item>

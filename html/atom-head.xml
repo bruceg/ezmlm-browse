@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed version="0.3"
+      xmlns="http://purl.org/atom/ns#">
+ <title>%(html(listdesc))s</title>
+ <link rel="alternate"
+       type="text/html"
+       href="%(html(absurl(list=list)))s"/>
+ <modified>%(isogmtime(timestamp))s</modified>
+ <author>
+  <name>%(html(listemail))s</name>
+ </author>
+ <generator url="http://untroubled.org/ezmlm-browse/"
+            version="%(version.version)s">
+  %(version.full)s
+ </generator>

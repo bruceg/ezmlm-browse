@@ -1,0 +1,15 @@
+ <entry>
+  <title>%(html(subject))s</title>
+  <link rel="alternate"
+        type="text/html"
+        href="%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s"/>
+  <id>%(html(absurl(list=list,cmd='showmsg',msgnum=msgnum)))s</id>
+  <author>
+   <name>%(html(author))s</name>
+  </author>
+  <issued>%(isogmtime(timestamp))s</issued>
+  <modified>%(isogmtime(timestamp))s</modified>
+  <content><pre>From: %(html(author))s
+
+%(html(mask_email(body)))s</pre></content>
+ </entry>
