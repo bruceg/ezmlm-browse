@@ -3,6 +3,10 @@
 <head>
 %(iif(style and style <> "None",
       '<link href="%s%s" rel="stylesheet" type="text/css">'%(cssprefix,style)))s
+%(iif(list,
+      '<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="%s" />' % absurl(list=list,cmd='feed',feedtype='rss2')))s
+%(iif(list,
+      '<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="%s" />' % absurl(list=list,cmd='feed',feedtype='atom')))s
 <title>%(iif(list, list+": "))s%(title)s</title>
 <meta NAME="robots" CONTENT="noindex">
 <meta NAME="robots" CONTENT="nofollow">
