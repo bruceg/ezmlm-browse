@@ -30,7 +30,9 @@ defaults = {
 	# directory. If the stylesheets are placed in your root htdocs dir,
 	# CSSPREFIX should be '/'. If you specify a subdirectory, make sure
 	# you place the trailing '/' (slash) character.
-	CSSPREFIX: '/stylesheets/',
+	CSSPREFIX: '',
+	# The default maximum line length to allow when doing word wrapping.
+	WRAPWIDTH: 0,
 }
 
 # The base directory under which all of the mailing lists can be found.

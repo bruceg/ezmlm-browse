@@ -77,6 +77,33 @@ rx_addr = re.compile(r'\S+@\S+\.\S+')
 def mask_email(str):
         return rx_addr.sub('####@####.####', str)
 
+def wordwrap(str):
+	try:
+		width = int(ctxt.get(WRAPWIDTH, 0))
+	except:
+		return str
+	if not width:
+		return str
+	out = []
+	for line in str.split('\n'):
+		while len(line) > width:
+			# Try to break the line on the first space before the width.
+			space = line.rfind(' ', 0, width)
+			if space == -1:
+				# None found, now fall back to the first space on the line.
+				space = line.find(' ')
+				if space == -1:
+					# No spaces found, no word-wrapping can be done.
+					break
+			# If the remainder of the line is empty, don't do anything.
+			nextline = line[space+1:].lstrip()
+			if not nextline:
+				break
+			out.append(line[:space])
+			line = nextline
+		out.append(line)
+	return '\n'.join(out)
+
 def relink(text, classname, **kw):
 	# Put certain keywords in a fixed order
 	pre = []
@@ -170,6 +197,7 @@ def update_global_context():
 		'html': escape_html,
 		'markup_urls': markup_urls,
 		'mask_email': mask_email,
+		'wordwrap': wordwrap,
 		'msgauthlink': msgauthlink,
 		'msgsubjlink': msgsubjlink,
 		'monthname': monthname,
@@ -288,6 +316,7 @@ def main():
 	ctxt[MSGSPERPAGE] = 10
 	ctxt[PERPAGE] = 20
 	ctxt[STYLE] = ''
+	ctxt[WRAPWIDTH] = 0
 	ctxt[TERMS] = ''
 	ctxt[TZ] = ''
 	# Update with defaults from the config

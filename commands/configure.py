@@ -23,6 +23,11 @@ def do(ctxt):
 		try:
 			cookie[MSGSPERPAGE] = ctxt[MSGSPERPAGE] = int(ctxt['_msgsperpage'])
 		except ValueError: pass
+	if ctxt.has_key('_wrapwidth'):
+		try:
+			cookie[WRAPWIDTH] = ctxt[WRAPWIDTH] = int(ctxt['_wrapwidth'])
+		except ValueError:
+			pass
 	if ctxt.has_key('_alt_part'):
 		cookie[ALTPART] = ctxt[ALTPART] = ctxt['_alt_part']
 	if cookie:
