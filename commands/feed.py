@@ -14,19 +14,19 @@ feedtypes = {
 \r
 <?xml version="1.0" encoding="iso-8859-1"?>
 <feed version="0.3"
-      xmlns="http://purl.org/atom/ns#draft-ietf-atompub-format-03">
- <head>
-  <title>%(listdesc)s</title>
-  <link href="%(html(absurl(list=list)))s"/>
-  <updated>%(now)s</updated>
-  <author>
-   <name>%(listemail)s</name>
-  </author>
-  <generator url="http://untroubled.org/ezmlm-browse/"
-             version="%(version.version)s">
-   %(version.full)s
-  </generator>
- </head>
+      xmlns="http://purl.org/atom/ns#">
+ <title>%(listdesc)s</title>
+ <link rel="alternate"
+       type="text/html"
+       href="%(html(absurl(list=list)))s"/>
+ <modified>%(now)s</modified>
+ <author>
+  <name>%(listemail)s</name>
+ </author>
+ <generator url="http://untroubled.org/ezmlm-browse/"
+            version="%(version.version)s">
+  %(version.full)s
+ </generator>
 ''',
 ''' <entry>
   <title>%(subject)s</title>
@@ -37,7 +37,8 @@ feedtypes = {
   <author>
    <name>%(author)s</name>
   </author>
-  <updated>%(isotime)s</updated>
+  <issued>%(isotime)s</issued>
+  <modified>%(isotime)s</modified>
  </entry>
 ''',
 '''</feed>
