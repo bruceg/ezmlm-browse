@@ -42,6 +42,10 @@ defaults = {
 	FEEDTYPE: 'atom',
 	# The number of messages to put into a feed.
 	FEEDMSGS: 10,
+	# The order in which messages are normally sorted.
+	# 'ascending' means oldest to newest
+	# 'descending' means newest to oldest
+	DATESORT: 'ascending',
 }
 
 # The base directory under which all of the mailing lists can be found.

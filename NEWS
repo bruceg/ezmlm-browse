@@ -3,6 +3,8 @@ Changes in version 0.10
 
 - Added support for generation of syndication feeds.
 
+- Added support for reversing the order of the "by Date" message list.
+
 - Added support for blocking or allowing for downloading raw messages.
 
 - Added CSSPREFIX configuration item, to allow for easy configuration of

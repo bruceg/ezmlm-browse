@@ -30,6 +30,8 @@ def do(ctxt):
 			pass
 	if ctxt.has_key('_alt_part'):
 		cookie[ALTPART] = ctxt[ALTPART] = ctxt['_alt_part']
+	if ctxt.has_key('_date_sort'):
+		cookie[DATESORT] = ctxt[DATESORT] = ctxt['_date_sort']
 	if cookie:
 		for key in cookie.keys():
 			cookie[key]['expires'] = 60*60*24*365*2
