@@ -127,7 +127,7 @@ def absurl(**kw):
 					apply(relurl, (), kw)))
 
 def relink(text, classname, **kw):
-	return '<a class="%s" href="?%s">%s</a>' % (
+	return '<a class="%s" href="%s">%s</a>' % (
 		classname, apply(relurl, (), kw), text)
 
 def cmdlink(text, classname, command, **kw):
