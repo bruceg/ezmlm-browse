@@ -1,5 +1,6 @@
 <tr class=%(iif(row%2, "even", "odd"))srow>
 <td><a class=listlink href="?list=%(list)s">%(list)s</a></td>
 <td class=listdesc>%(listdesc)s</td>
-<td><a href="mailto:%(listsub)s?subject=Just+click+send">[Subscribe]</a></td>
+<td><a href="mailto:%(listsub)s?subject=Just+click+send">[Subscribe]</a>
+%(cmdlink('[Feed]','feed-link','feed'))s</td>
 </tr>
