@@ -1,6 +1,15 @@
 from globals import *
 from globalfns import *
+import email
 import feedgen
+
+def rec_gettext(part):
+	if part.is_multipart():
+		return '\n'.join([ rec_gettext(p)
+						   for p in part.get_payload() ])
+	if part.get_type('text/plain') == 'text/plain':
+		return part.get_payload()
+	return ''
 
 ###############################################################################
 # Command: Generate news feed
@@ -17,4 +26,7 @@ def do(ctxt):
 		except KeyError:
 			pass
 		num -= 1
+	for msg in msgs:
+		e = email.message_from_file(ctxt[EZMLM].open(int(msg[MSGNUM])))
+		msg[BODY] = rec_gettext(e).strip()
 	feedtype.generate(ctxt, msgs)
