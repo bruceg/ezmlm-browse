@@ -9,25 +9,32 @@ from globals import *
 write = sys.stdout.write
 
 ###############################################################################
-# HTML fetching
-_html_cache = { }
-_html_path = sys.path[:2]
+# Template fetching
+_template_cache = { }
+_template_path = sys.path[:2]
 _rx_percent = re.compile('%([^(])')
-def html(name):
-	global _html_cache
+def template(filename):
+	global _template_cache
+	global _template_path
 	try:
-		f = _html_cache[name]
+		f = _template_cache[filename]
 	except KeyError:
-		h = os.path.join('html', name.replace('/', ':') + '.html')
+		n = os.path.join('html', filename.replace('/', ':'))
 		f = ''
-		for dir in _html_path:
+		for dir in _template_path:
 			try:
-				f = open(os.path.join(dir, h)).read()
+				f = open(os.path.join(dir, n)).read()
 				break
 			except IOError:
 				pass
-		_html_cache[name] = f
+		_template_cache[filename] = f
 	return f
+
+def html(name):
+	return template(name + '.html')
+
+def xml(name):
+	return template(name + '.xml')
 
 ###############################################################################
 def _build_base():
