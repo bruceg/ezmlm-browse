@@ -157,7 +157,7 @@ class EzmlmArchive:
 
 	def set_months(self, form):
 		if not form.has_key(MONTH):
-			firstmonth = prevmonth = month = nextmonth = lastmonth = None
+			firstmonth = prevmonth = month = nextmonth = lastmonth = int(self.months[0])
 		else:
 			firstmonth = int(self.months[-1])
 			lastmonth = int(self.months[0])
@@ -167,7 +167,7 @@ class EzmlmArchive:
 			if month >= lastmonth:
 				nextmonth = lastmonth
 			else:
-				nextmonth = self.months[self.months.index(month)+1]
+				nextmonth = self.months[self.months.index(month)-1]
 			if month <= firstmonth:
 				prevmonth = firstmonth
 			else:
