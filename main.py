@@ -67,7 +67,7 @@ _url_escapes = ( ('%', '%25'),
 
 def escape_url(str):  return escape(str, _url_escapes)
 
-def nl2br(str): return str.replace('\n', '<br>')
+def nl2br(str): return str.replace('\n', '<br />')
 
 rx_url = re.compile(r'([^\s\"]+://[^\s\"]+)')
 def markup_urls(str): return rx_url.sub(r'<a href="\1">\1</a>', str)
