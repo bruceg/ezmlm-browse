@@ -7,8 +7,8 @@ Version @VERSION@
 This is ezmlm-browse, a web interface for browsing ezmlm-idx (version
 0.40 or later) archives.  The presentation is modeled from that of the
 ezmlm-cgi archive browser that is part of ezmlm-idx, but with several
-additions.  However, the output is completely template drive, so you can
-make it fit into your current web scheme.
+additions.  However, the output is completely template driven, so you
+can make it fit into your current web scheme.
 
 A mailing list has been set up to discuss this and other packages.
 To subscribe, send an email to:
@@ -23,8 +23,9 @@ Requirements:
 
 - Python 2 (tested with 2.3, should work with version 2.2 or later)
 - ezmlm 0.53 + idx 0.40 or later.  If you are using an older version of
-  ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" command on all
-  lists you wish to browse.
+  ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" and
+  "ezmlm-archive" commands on all lists you wish to browse.
+- bglibs to compile the wrapper program.
 
 Installation:
 
@@ -42,6 +43,10 @@ Configuration:
 - Edit config.py to declare which mailing lists are visible to the web,
   and set the other defaults as appropriate (most notably, the path to
   the CSS files).
+- Mailing lists should have the "-i" option enabled to keep the
+  necessary indices up to date.  If this is not enabled, run the
+  following command for each list:
+	ezmlm-make -+ -i /path/to/list
 
 Security Notes:
 
