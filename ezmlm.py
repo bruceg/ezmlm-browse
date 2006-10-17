@@ -247,10 +247,14 @@ class EzmlmArchive:
 						if subject.find(term) < 0: subject = ''; break
 					if not subject: continue
 					groups = match.groups()
-					m = self.index[int(groups[0])]
-					m[MSGCOUNT] = int(groups[2])
-					m[MONTH] = int(month)
-					threads.append(m)
+					try:
+						m = self.index[int(groups[0])]
+					except KeyError:
+						pass
+					else:
+						m[MSGCOUNT] = int(groups[2])
+						m[MONTH] = int(month)
+						threads.append(m)
 		return threads
 
 	def _parse_message(self, num):
