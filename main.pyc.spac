@@ -1,0 +1,2 @@
+: version.py
+python2 -c '__import__("%(base)s")'
