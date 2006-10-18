@@ -218,16 +218,22 @@ class EzmlmArchive:
 	def threads(self, month):
 		list = [ ]
 		path = os.path.join(self.archdir, 'threads', str(month))
-		for line in open(path).readlines():
-			match = _rx_thread.match(line.strip())
-			if match:
-				groups = match.groups()
-				list.append({
-					MSGNUM: int(groups[0]),
-					THREADID: groups[1],
-					MSGCOUNT: int(groups[2]),
-					SUBJECT: groups[3]
-					})
+		try:
+			f = open(path).readlines()
+		except IOError:
+			f = [ ]
+		list = [ _rx_thread.match(line.strip())
+				 for line in f ]
+		list = [ match.groups()
+				 for match in list
+				 if match ]
+		list = [ {
+			MSGNUM: int(match[0]),
+			THREADID: match[1],
+			MSGCOUNT: int(match[2]),
+			SUBJECT: match[3]
+			}
+				 for match in list ]
 		return list
 
 	def search(self, terms):

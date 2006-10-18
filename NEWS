@@ -1,7 +1,8 @@
 -------------------------------------------------------------------------------
 Changes in version 0.11
 
-- Fixed problem in handling of missing articles when searching.
+- Fixed problem in handling of missing articles when searching, and
+  missing month thread indexes.
 
 - Fixed some build issues.
 
