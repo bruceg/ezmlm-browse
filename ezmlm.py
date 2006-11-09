@@ -131,6 +131,7 @@ class EzmlmArchive:
 		self.archdir = os.path.join(listdir, 'archive')
 		self.months = map(int,
 						  os.listdir(os.path.join(self.archdir, 'threads')))
+		self.months = filter(lambda a: a >= 10000, months)
 		self.months.sort()
 		self.months.reverse()
 		self.index = EzmlmIndex(listdir)
