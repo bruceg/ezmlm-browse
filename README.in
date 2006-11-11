@@ -1,6 +1,6 @@
 ezmlm-browse
 Web browser for ezmlm-idx archives
-Bruce Guenter <bruceg@em.ca>
+Bruce Guenter <bruce@untroubled.org>
 Version @VERSION@
 @TODAY@
 
@@ -27,25 +27,45 @@ Requirements:
   "ezmlm-archive" commands on all lists you wish to browse.
 - bglibs to compile the wrapper program.
 
-Installation:
+Building:
 
 - Unpack ezmlm-browse into a non-web-visible directory.  This is the
   directory from which ezmlm-browse will execute.
+
+- Make sure all the conf-* files have values appropriate for your
+  system (they contain notes about what they are used for).
+
+- If your python program is not in the path, put the full path to it in
+  the "auto-python" file.
+
 - Run "make" to build "wrapper" and precompile the Python bytecode.
-- Either copy the "wrapper" program or symlink the "index.cgi" script
-  into your web tree as a CGI.
-- If necessary, make the wrapper setuid to whatever user owns the
-  mailing list archive files.
-- Copy the .css files into a web-visible directory.
+
+Installation:
+
+- If necessary, make the "wrapper" program setuid to whatever user has
+  read access to the mailing list archive files.  Do *NOT* make any
+  Python script setuid.
+
+- Symlink either "wrapper" or "browse.cgi" into a location where CGI
+  programs may be executed.  Usually this is either something in a
+  "cgi-bin" directory or a file elsewhere named "something.cgi".  The
+  destination name does not need to be either "wrapper" or "browse.cgi"
+  as the script will automatically determine its own name for the links
+  it creates.
+
+- Copy the *.css files into a web-visible directory, and make note of
+  that directory for the configuration below.
 
 Configuration:
 
 - Edit config.py to declare which mailing lists are visible to the web,
-  and set the other defaults as appropriate (most notably, the path to
-  the CSS files).
+  and set the other defaults as appropriate (most notably, the web path
+  to the CSS files installed above).
+
 - Mailing lists should have the "-i" option enabled to keep the
   necessary indices up to date.  If this is not enabled, run the
   following command for each list:
+
 	ezmlm-make -+ -i /path/to/list
 
 Security Notes:
@@ -63,7 +83,7 @@ Security Notes:
 
   - Use the Apache su-exec module.
 
-This program is Copyright(C) 2004 Bruce Guenter, and may be copied
+This program is Copyright(C) @YEAR@ Bruce Guenter, and may be copied
 according to the GNU GENERAL PUBLIC LICENSE (GPL) Version 2 or a later
 version.  A copy of this license is included with this package.  This
 package comes with no warranty of any kind.

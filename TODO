@@ -1,6 +1,11 @@
+- Make it work with ModPython -- eliminate the use of cwd
+  Use $SCRIPT_FILENAME to add to the path?
+
 - Handle time zones.
 
 - Make ezmlm also return previous and next message numbers.
+
+- Better text search -- full text search?
 
 - Figure out how to determine dates on the messages.
   - Parse the first Received: line or the Date: line
@@ -19,14 +24,10 @@
   library that uses the template library.
 
 - i18n
+  See http://lists.untroubled.org/?list=bgware&cmd=showmsg&msgnum=587
 
 -------------------------------------------------------------------------------
 Ideas from other implementations:
 
-List of posts by a given author (divided by month)
 Author index / searching
-Thread tree display
-Downloadable attachments
-"raw" message view
-Generation of RSS feeds
 Language customization

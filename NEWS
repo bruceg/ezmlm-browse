@@ -6,7 +6,8 @@ Changes in version 0.11
 
 - Fixed a problem with bogus month thread index filenames.
 
-- Fixed some build issues.
+- Fixed several build issues, including problems finding the python
+  program.
 
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
