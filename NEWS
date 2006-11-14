@@ -1,6 +1,8 @@
 -------------------------------------------------------------------------------
 Changes in version 0.12
 
+- Fixed the distribution tarball to actuall include all source files.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------

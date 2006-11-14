@@ -1,2 +1,2 @@
-: version.py
+: main.py version.py
 ./compilepy %(base)s
