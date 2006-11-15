@@ -27,48 +27,6 @@ Requirements:
   "ezmlm-archive" commands on all lists you wish to browse.
 - bglibs to compile the wrapper program.
 
-Building:
-
-- Unpack ezmlm-browse into a non-web-visible directory.  This is the
-  directory from which ezmlm-browse will execute.
-
-- Make sure all the conf-* files have values appropriate for your
-  system (they contain notes about what they are used for).
-
-- If your python program is not in the path, put the full path to it in
-  the "auto-python" file.
-
-- Run "make" to build "wrapper" and precompile the Python bytecode.
-
-Installation:
-
-- If necessary, make the "wrapper" program setuid to whatever user has
-  read access to the mailing list archive files.  Do *NOT* make any
-  Python script setuid.
-
-- Symlink either "wrapper" or "browse.cgi" into a location where CGI
-  programs may be executed.  Usually this is either something in a
-  "cgi-bin" directory or a file elsewhere named "something.cgi".  The
-  destination name does not need to be either "wrapper" or "browse.cgi"
-  as the script will automatically determine its own name for the links
-  it creates.
-
-- Symlink the "files" directory into a web-visible directory, and make
-  note of that location for the configuration below.  The visible name
-  does not need to remain as "files".
-
-Configuration:
-
-- Edit config.py to declare which mailing lists are visible to the web,
-  and set the other defaults as appropriate (most notably, the web path
-  to the "files" directory installed above should go in FILESPREFIX).
-
-- Mailing lists should have the ezmlm-make "-i" option enabled to keep
-  the necessary indices up to date.  If this is not enabled, run the
-  following command for each list:
-
-	ezmlm-make -+ -i /path/to/list
-
 Security Notes:
 
 - You will need to choose one of the following options:
@@ -82,7 +40,7 @@ Security Notes:
     and setuid.  If I have not been adequately careful, this may allow
     an attacker to execute code as that user.
 
-  - Use the Apache su-exec module.
+  - Use the Apache suexec module.
 
 This program is Copyright(C) @YEAR@ Bruce Guenter, and may be copied
 according to the GNU GENERAL PUBLIC LICENSE (GPL) Version 2 or a later

@@ -1,5 +1,5 @@
-Note for Users Upgrading from ezmlm-browse version 0.11 and earlier
--------------------------------------------------------------------
+Upgrading from ezmlm-browse version 0.11 and earlier
+----------------------------------------------------
 
 In version 0.12, the location of the static files (stylesheets and
 icons) was moved into a subdirectory to simplify adding other files in
