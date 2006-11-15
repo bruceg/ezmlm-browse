@@ -2,7 +2,7 @@
 <html>
 <head>
 %(iif(style and style <> "None",
-      '<link href="%s%s" rel="stylesheet" type="text/css">'%(cssprefix,style)))s
+      '<link href="%s%s" rel="stylesheet" type="text/css">'%(filesprefix,style)))s
 %(iif(list,
       '<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="%s" />' % absurl(list=list,cmd='feed',feedtype='rss2')))s
 %(iif(list,

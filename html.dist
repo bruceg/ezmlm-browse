@@ -1,2 +1,0 @@
-#files(recglob('*.html'))
-dir('html')

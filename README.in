@@ -53,17 +53,18 @@ Installation:
   as the script will automatically determine its own name for the links
   it creates.
 
-- Copy the *.css files into a web-visible directory, and make note of
-  that directory for the configuration below.
+- Symlink the "files" directory into a web-visible directory, and make
+  note of that location for the configuration below.  The visible name
+  does not need to remain as "files".
 
 Configuration:
 
 - Edit config.py to declare which mailing lists are visible to the web,
   and set the other defaults as appropriate (most notably, the web path
-  to the CSS files installed above).
+  to the "files" directory installed above should go in FILESPREFIX).
 
-- Mailing lists should have the "-i" option enabled to keep the
-  necessary indices up to date.  If this is not enabled, run the
+- Mailing lists should have the ezmlm-make "-i" option enabled to keep
+  the necessary indices up to date.  If this is not enabled, run the
   following command for each list:
 
 	ezmlm-make -+ -i /path/to/list

@@ -335,10 +335,10 @@ def main():
 	# Set up hard-coded defaults
 	ctxt[ALTPART] = 'text/plain'
 	ctxt[COMMAND] = 'months'
-	ctxt[CSSPREFIX] = ''
 	ctxt[DATESORT] = 'ascending'
 	ctxt[FEEDMSGS] = 10
 	ctxt[FEEDTYPE] = 'atom'
+	ctxt[FILESPREFIX] = ''
 	ctxt[FORMATTIME] = ''
 	ctxt[LIST] = ''
 	ctxt[MSGSPERPAGE] = 10

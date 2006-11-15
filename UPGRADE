@@ -1,0 +1,20 @@
+Note for Users Upgrading from ezmlm-browse version 0.11 and earlier
+-------------------------------------------------------------------
+
+In version 0.12, the location of the static files (stylesheets and
+icons) was moved into a subdirectory to simplify adding other files in
+the future.
+
+If desired, you may continue to place static files in the same location
+they were previously.  Simply copy or link all the items in the "files"
+directory into place.
+
+Otherwise, symlink the "files" directory as directed in the README.  You
+may remove the *.css files that were copied in previous installations,
+as they are no longer used by the standard templates.
+
+In either case, you need to edit the config.py file, and replace the
+CSSPREFIX setting with a FILESPREFIX setting.  The value should remain
+unchanged if you copied the files over individually as was done
+previously.  Otherwise it will need to contain the subdirectory name
+created above.

@@ -29,24 +29,23 @@ defaults = {
 	PERPAGE: 20,
 	# The number of messages per page.
 	MSGSPERPAGE: 10,
-	# The default stylesheet prefix. Note: The stylesheets cannot reside
-	# in your cgi-bin directory, they must be placed your normal htdocs
-	# directory. If the stylesheets are placed in your root htdocs dir,
-	# CSSPREFIX should be '/'. If you specify a subdirectory, make sure
-	# you place the trailing '/' (slash) character.
-	CSSPREFIX: '',
+	# The directory containing all static files such as icons and
+	# stylesheets.  Note: These files cannot reside in your cgi-bin
+	# directory, they must be placed somewhere in your normal htdocs
+	# directory. If the files are in the same directory as the CGI
+	# script, this may be set to empty.  Otherwise make sure you it ends
+	# with a trailing '/' (slash) character.
+	FILESPREFIX: '/files/',
 	# The default maximum line length to allow when doing word wrapping.
 	WRAPWIDTH: 0,
-	# The default type of syndication feed to produce.
-	# This may be set to 'atom', 'rss2', or 'rss' (an alias for 'rss2').
+	# The default type of syndication feed to produce.  This may be set
+	# to 'atom', 'rss2', or 'rss' (an alias for 'rss2').
 	FEEDTYPE: 'atom',
 	# The number of messages to put into a feed.
 	FEEDMSGS: 10,
-	# The order in which messages are normally sorted.
-	# 'ascending' means oldest to newest
-	# 'descending' means newest to oldest
-	DATESORT: 'ascending',
-}
+	# The order in which messages are normally sorted.  'ascending'
+	# means oldest to newest 'descending' means newest to oldest
+	DATESORT: 'ascending', }
 
 # The base directory under which all of the mailing lists can be found.
 basedir = '/home/bruce/lists'

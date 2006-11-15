@@ -1,11 +1,16 @@
 -------------------------------------------------------------------------------
 Changes in version 0.12
 
+- Moved all static files into a separate "files" directory.
+
 - Fixed the distribution tarball to actuall include all source files.
 
 - Fixed the previous "fix" to bogus month thread index filenames.
 
 - Added a feed icon to the lists page from http://www.feedicons.com/
+
+Note: The file move above will likely cause breakage on upgrades.  See
+the UPGRADE file for more information.
 
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
