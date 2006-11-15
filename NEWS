@@ -3,6 +3,8 @@ Changes in version 0.12
 
 - Fixed the distribution tarball to actuall include all source files.
 
+- Fixed the previous "fix" to bogus month thread index filenames.
+
 - Added a feed icon to the lists page from http://www.feedicons.com/
 
 Development of this version has been sponsored by FutureQuest, Inc.
