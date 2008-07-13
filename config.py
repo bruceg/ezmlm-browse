@@ -4,6 +4,9 @@ from globals import *
 # complete with all attachments and email addresses intact.
 allowraw = 0
 
+# Set this to non-zero to mask email addresses.
+mask_emails = 1
+
 # Values are looked up in the following order:
 # 1. CGI environment variables
 # 2. Hard-coded defaults

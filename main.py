@@ -75,7 +75,9 @@ def markup_urls(str): return rx_url.sub(r'<a href="\1">\1</a>', str)
 #rx_addr = re.compile(r'<[^>@]+@[^>]+>')
 rx_addr = re.compile(r'\S+@\S+\.\S+')
 def mask_email(str):
-        return rx_addr.sub('####@####.####', str)
+	if config.mask_emails:
+		return rx_addr.sub('####@####.####', str)
+	return str
 
 def wordwrap(str):
 	try:
