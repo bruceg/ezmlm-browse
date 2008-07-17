@@ -145,7 +145,7 @@ def rec_thread(ctxt):
 
 def sub_showpart(ctxt, part):
 	ctxt[BODY] = part.get_payload(decode=1)
-	type = ctxt[TYPE] = part.get_type('text/plain')
+	type = ctxt[TYPE] = part.get_content_type()
 	ctxt[FILENAME] = part.get_filename()
 	template = html('msg-' + type.replace('/', '-'))
 	if not template:
@@ -154,7 +154,7 @@ def sub_showpart(ctxt, part):
 
 def rec_noshowpart(ctxt, part, partnum):
 	ctxt[PART] = partnum
-	ctxt[TYPE] = part.get_type('text/plain')
+	ctxt[TYPE] = part.get_content_type()
 	# FIXME: show something here
 	if part.is_multipart():
 		for p in part.get_payload():
@@ -165,13 +165,13 @@ def rec_noshowpart(ctxt, part, partnum):
 
 def rec_showpart(ctxt, part, partnum):
 	ctxt[PART] = partnum
-	ctxt[TYPE] = part.get_type('text/plain')
+	ctxt[TYPE] = part.get_content_type()
 	if part.is_multipart():
 		# handle alternative parts differently
-		if part.get_subtype() == 'alternative':
+		if part.get_content_subtype() == 'alternative':
 			m = { }
 			for p in part.get_payload():
-				m[p.get_type('text/plain')] = p
+				m[p.get_content_type()] = p
 			try:
 				altpart = m[ctxt[ALTPART]]
 			except KeyError:

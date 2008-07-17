@@ -6,6 +6,8 @@ Changes in version 0.13
 
 - Fixed handling archives with invalid month numbers.
 
+- Fixed to work with Python 2.5.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
