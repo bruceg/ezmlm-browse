@@ -144,7 +144,13 @@ def rec_thread(ctxt):
 	ctxt.pop()
 
 def sub_showpart(ctxt, part):
-	ctxt[BODY] = part.get_payload(decode=1)
+	body = part.get_payload(decode=1)
+	try:
+		charset = part.get_content_charset('us-ascii')
+		body = unicode(body, charset, 'replace').encode('utf-8')
+	except:
+		pass
+	ctxt[BODY] = body
 	type = ctxt[TYPE] = part.get_content_type()
 	ctxt[FILENAME] = part.get_filename()
 	template = html('msg-' + type.replace('/', '-'))

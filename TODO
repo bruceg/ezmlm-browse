@@ -1,8 +1,10 @@
+- Add setup script
+
+- Add a script to convert from config.py to config.ini
+
 - Switch to ConfigParser and INI files for configuration
 
 - Make the email mask option work per-list too
-
-- Convert messages to UTF-8 on output.
 
 - Make it work with ModPython -- eliminate the use of cwd
   Use $SCRIPT_FILENAME to add to the path?
