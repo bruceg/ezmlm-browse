@@ -1,81 +1,39 @@
-from globals import *
+from ConfigParser import SafeConfigParser
+import os
+import sys
 
-# Set this to non-zero to allow the raw message bodies to be downloaded,
-# complete with all attachments and email addresses intact.
-allowraw = 0
+_config = SafeConfigParser()
+_config.read([ os.path.join(d,'config.ini')
+			   for d in sys.path[:2] ])
 
-# Set this to non-zero to mask email addresses.
-mask_emails = 1
+basedir = _config.get('global', 'basedir')
+basehost = _config.get('global', 'basehost')
+allowraw = _config.getboolean('global', 'allowraw')
+mask_emails = _config.getboolean('global', 'mask_emails')
 
-# Values are looked up in the following order:
-# 1. CGI environment variables
-# 2. Hard-coded defaults
-# 3. Configured defaults (below)
-# 4. Cookies
-# 5. Form/URL items
-# 6. List configuration (below)
-# Values set later in the list override earlier values.
+if 'styles' in _config.sections():
+	styles = [ ]
+	for css in _config.options('styles'):
+		styles.append((css, _config.get('styles', css)))
+else:
+	styles = [ None ]
 
-styles = (
-	'None',
-	('browse.css', 'Default'),
-	('purple.css', 'Purple'),
-	('greenterm.css', 'Terminal'),
-	)
+defaults = dict(_config.items('defaults'))
 
-# The following list itemizes default values.  Most of these can be
-# omitted if desired.
-defaults = {
-	# The default style sheet.
-	STYLE: 'browse.css',
-	# The number of items per page.
-	PERPAGE: 20,
-	# The number of messages per page.
-	MSGSPERPAGE: 10,
-	# The directory containing all static files such as icons and
-	# stylesheets.  Note: These files cannot reside in your cgi-bin
-	# directory, they must be placed somewhere in your normal htdocs
-	# directory. If the files are in the same directory as the CGI
-	# script, this may be set to empty.  Otherwise make sure you it ends
-	# with a trailing '/' (slash) character.
-	FILESPREFIX: '/files/',
-	# The default maximum line length to allow when doing word wrapping.
-	WRAPWIDTH: 0,
-	# The default type of syndication feed to produce.  This may be set
-	# to 'atom', 'rss2', or 'rss' (an alias for 'rss2').
-	FEEDTYPE: 'atom',
-	# The number of messages to put into a feed.
-	FEEDMSGS: 10,
-	# The order in which messages are normally sorted.  'ascending'
-	# means oldest to newest 'descending' means newest to oldest
-	DATESORT: 'ascending', }
+def _parse_archive(config, section, name):
+	archive = dict(config.items(section))
+	archive.setdefault('listdesc', name)
+	archive.setdefault('listdir', os.path.join(basedir, name))
+	archive.setdefault('listemail', '%s@%s' % (name,basehost))
+	archive.setdefault('listsub', '%s-subscribe@%s' % (name,basehost))
+	return archive
 
-# The base directory under which all of the mailing lists can be found.
-basedir = '/home/bruce/lists'
+def _parse_archives(config):
+	archives = { }
+	for section in config.sections():
+		if section[:8] == 'archive:':
+			name = section[8:]
+			archives[name] = _parse_archive(config, section, name)
+	return archives
 
-# The base hostname for mailing list and subscribe addresses.
-basehost = 'lists.untroubled.org'
-
-# For each mailing list you want to have visible to the web, add an
-# entry to this table.  Each entry consists of a dictionary
-# containing:
-#
-# LISTDESC: The description to show for this list when producing the index
-# LISTDIR: The directory in which the "archive" directory can be found.
-# LISTEMAIL: The email address to use to send messages to the list.
-# LISTSUB: The email address to use to subscribe to the list.
-#
-# If they are not present, the LISTDIR, LISTEMAIL, and LISTSUB values
-# are automatically generated from the list name and the base directory
-# or host above.
-#
-# This is the place to override any of the defaults above.
-# Note that any setting you put here will override any cookie or URL/form
-# value as well.
-archives = {
-	'bgware': { LISTDESC: 'Software by Bruce Guenter' },
-	'vmailmgr': { LISTDESC: 'VMailMgr announcements, development, and users' },
-	'nullmailer': { LISTDESC: 'The NullMailer MTA' },
-	'rpms': { LISTDESC: 'RPMs Built by Bruce Guenter' },
-	'test-idx': { LISTDESC: 'Test list' },
-	}
+archives = _parse_archives(_config)

@@ -1,6 +1,8 @@
 -------------------------------------------------------------------------------
 Changes in version 0.20
 
+- Switched configuration to use a config.ini file.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
