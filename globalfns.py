@@ -5,6 +5,7 @@ import sys
 import time
 
 from globals import *
+import config
 
 write = sys.stdout.write
 
@@ -145,10 +146,12 @@ def rec_thread(ctxt):
 
 def sub_showpart(ctxt, part):
 	body = part.get_payload(decode=1)
+	charset = part.get_content_charset(config.charsets['default'])
+	charset = config.charsets.get(charset, charset) or charset
+	ctxt[CHARSET] = charset
 	try:
-		charset = part.get_content_charset('us-ascii')
 		body = unicode(body, charset, 'replace').encode('utf-8')
-	except:
+	except LookupError:
 		pass
 	ctxt[BODY] = body
 	type = ctxt[TYPE] = part.get_content_type()
