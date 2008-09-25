@@ -3,7 +3,7 @@ import os
 import sys
 
 _config = SafeConfigParser()
-_config.read([ os.path.join(d,'config.ini')
+_config.read([ os.path.join(d,'ezmlm-browse.ini')
 			   for d in sys.path[:2] ])
 
 basedir = _config.get('global', 'basedir')
