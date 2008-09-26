@@ -1,0 +1,49 @@
+.TH ezmlm-browse-conf 1
+.SH NAME
+setup \- what it does
+.SH SYNOPSIS
+.B ezmlm-browse-conf
+[
+.B \-\-apache
+] [
+.B \-\-setuid
+]
+.I DESTPATH TARGET.cgi [ LISTPATH HOSTNAME ]
+.SH DESCRIPTION
+This program sets up the necessary links and programs to use
+.B ezmlm-browse
+on a web server.
+.P
+.I DESTPATH
+is the path into which the files should be installed.  This is
+necessarily a directory which the web server can access.
+.I TARGET.cgi
+is the filename for the CGI script in the target directory.  This will
+frequently be
+.I index.cgi
+if there is nothing else in the directory.
+.P
+If
+.I LISTPATH
+and
+.I HOSTNAME
+are present on the command line, then a sample configuration file is
+written to the destination directory.
+.I LISTPATH
+is the full path to the parent directory to the mailing list archives.
+.I HOSTNAME
+is the domain name on which the mailing lists receive messages.
+.SH OPTIONS
+.TP
+.B \-\-apache
+Create an Apache
+.B .htaccess
+configuration file in the destination.
+.TP
+.B \-\-setuid
+Install a setuid CGI wrapper in the destination (instead of the usual
+startup script) in order to allow
+.B ezmlm-browse
+to read the archive files.  This is useful if the archive files are
+owned by a different user than the web server and Apache suexec (or
+equivalent) is not in use.

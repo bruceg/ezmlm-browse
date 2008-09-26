@@ -9,8 +9,22 @@ Building the Sources:
 
 - If your python program is not in the path, put the full path to it in
   the first line of a file called "auto-python".
+  If in doubt, skip this step.
 
 - Run "make".
+
+Simple Installation:
+
+- Run:
+
+  ./ezmlm-browse-conf --apache DESTPATH TARGET.cgi LISTPATH HOSTNAME
+
+  where: DESTPATH is the destination directory into which the files will
+  be installed, TARGET.cgi is the CGI filename to install, LISTPATH is
+  the full path name to the directory containing the mailing lists, and
+  HOSTNAME is the domain name on which the mailing lists receive email.
+
+  This script does all the steps in the recommended installation below.
 
 Recommended Installation:
 

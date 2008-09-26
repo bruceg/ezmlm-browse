@@ -1,4 +1,4 @@
-files = glob('*.py') + glob('*/*.py')
+files = [ f for f in glob('*.py') + glob('*/*.py') if not '-' in f ]
 files.append('version.py')
 files = map(lambda filename:filename[:-3]+'.pyc', files)
 dependon(files)
