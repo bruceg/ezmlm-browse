@@ -12,7 +12,7 @@ class Feed:
 		entry = xml(self.prefix + '-item')
 		footer = xml(self.prefix + '-tail')
 		ctxt['timestamp'] = msgs[0][TIMESTAMP]
-		write("Content-Type: %s\r\n\r\n" % self.ctype)
+		write("Content-Type: %s; charset=utf-8\r\n\r\n" % self.ctype)
 		write(header % ctxt)
 		ctxt.push()
 		for msg in msgs:

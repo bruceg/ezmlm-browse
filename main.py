@@ -294,7 +294,9 @@ def main_path(pathstr):
 		while parts:
 			part = part.get_payload()[parts[0]]
 			parts = parts[1:]
-		write('Content-Type: %s\r\n\r\n' % part.get_content_type())
+		write('Content-Type: %s; charset=%s\r\n\r\n' % (
+			part.get_content_type(),
+			part.get_content_charset('us-ascii').lower()))
 		write(part.get_payload(decode=1))
 	else:
 		try:
@@ -304,7 +306,9 @@ def main_path(pathstr):
 				if partnum <= 0:
 					break
 				partnum -= 1
-			write('Content-Type: %s\r\n\r\n' % part.get_content_type())
+			write('Content-Type: %s; charset=%s\r\n\r\n' % (
+				part.get_content_type(),
+				part.get_content_charset('us-ascii').lower()))
 			write(part.get_payload(decode=1))
 		except:
 			write('Content-Type: message/rfc822\r\n\r\n')

@@ -65,7 +65,7 @@ def _make_menubar(ctxt):
 
 ###############################################################################
 def header(ctxt, title, classbase):
-	write('Content-Type: text/html\r\n\r\n')
+	write('Content-Type: text/html; charset=utf-8\r\n\r\n')
 	ctxt[BASE] = _build_base()
 	ctxt[TITLE] = title
 	ctxt[CLASS] = classbase
