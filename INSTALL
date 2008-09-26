@@ -36,8 +36,8 @@ Recommended Installation:
 
 - Symlink the "files" directory in as-is.
 
-- Copy in the "config.py" file and edit it as appropriate for your site
-  and lists.  Set "FILESPREFIX" to "files/".
+- Copy in the "ezmlm-browse.ini" file and edit it as appropriate for
+  your site and lists.  Set "filesprefix" to "files/".
 
 - If using Apache, make sure CGI execution is enabled in that directory
   by adding the following lines to a ".htaccess" file in the same
@@ -68,9 +68,10 @@ Configuration:
   does not have read access to the web archives and is not using the
   Apache suexec module or equivalent.
 
-- Edit config.py to declare which mailing lists are visible to the web,
-  and set the other defaults as appropriate (most notably, the web path
-  to the "files" directory installed above should go in FILESPREFIX).
+- Edit ezmlm-browse.ini to declare which mailing lists are visible to
+  the web, and set the other defaults as appropriate (most notably, the
+  web path to the "files" directory installed above should go in
+  FILESPREFIX).
 
 - Mailing lists should have the ezmlm-make "-i" option enabled to keep
   the necessary indices up to date.  If this is not enabled, run the

@@ -1,6 +1,4 @@
-- Add a script to convert from config.py to config.ini
-
-- Switch to ConfigParser and INI files for configuration
+- Add a script to convert from config.py to ezmlm-browse.ini
 
 - Make the email mask option work per-list too
 
