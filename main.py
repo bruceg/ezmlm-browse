@@ -344,7 +344,6 @@ def main():
 	ctxt[DATESORT] = 'ascending'
 	ctxt[FEEDMSGS] = 10
 	ctxt[FEEDTYPE] = 'atom'
-	ctxt[FILESPREFIX] = ''
 	ctxt[FORMATTIME] = ''
 	ctxt[LIST] = ''
 	ctxt[MSGSPERPAGE] = 10
@@ -364,6 +363,9 @@ def main():
 	global form
 	form = load_form()
 	ctxt.update(form)
+
+	# Override certain context values based on configured settings
+	ctxt[FILESPREFIX] = config.filesprefix
 
 	try:
 		path = os.environ['PATH_INFO']

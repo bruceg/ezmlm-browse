@@ -71,12 +71,12 @@ allowraw = 0
 mask_emails = 1
 basedir = %(listpath)s
 basehost = %(hostname)s
+filesprefix = files/
 
 [defaults]
 style = browse.css
 perpage = 20
 msgsperpage = 10
-filesprefix = files/
 wrapwidth = 0
 feedtype = atom
 feedmsgs = 10
