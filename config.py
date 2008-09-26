@@ -8,8 +8,14 @@ _config.read([ os.path.join(d,'ezmlm-browse.ini')
 
 basedir = _config.get('global', 'basedir')
 basehost = _config.get('global', 'basehost')
-allowraw = _config.getboolean('global', 'allowraw')
-mask_emails = _config.getboolean('global', 'mask_emails')
+try:
+	allowraw = _config.getboolean('global', 'allowraw')
+except:
+	allowraw = False
+try:
+	mask_emails = _config.getboolean('global', 'mask_emails')
+except:
+	mask_emails = True
 
 if 'styles' in _config.sections():
 	styles = [ ]
