@@ -25,7 +25,7 @@ charsets = {
 	# first, the superset maps:
 	'us-ascii': 'windows-1252',
 	'iso-8859-1': 'windows-1252',
-	'iso-8859-1': 'iso-8859-8',
+	'iso-8859-8-i': 'iso-8859-8',
 	'ks_c_5601-1987': 'euc-kr',
 	# second, the educated guesses:
 	'x-unknown': 'windows-1252',
