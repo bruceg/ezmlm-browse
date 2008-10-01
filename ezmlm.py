@@ -101,6 +101,7 @@ class EzmlmIndex:
 		file = open(os.path.join(self.archdir, str(sub), 'index'))
 		l1 = file.readline()
 		l2 = file.readline()
+		prev_timestamp = 0
 		while l1 and l2:
 			l1 = _rx_index1.match(l1.rstrip())
 			l2 = _rx_index2.match(l2.rstrip())
@@ -108,7 +109,11 @@ class EzmlmIndex:
 				g1 = l1.groups()
 				g2 = l2.groups()
 				msgnum = int(g1[0])
-				timestamp = rfc822.mktime_tz(rfc822.parsedate_tz(g2[0]))
+				try:
+					timestamp = rfc822.mktime_tz(rfc822.parsedate_tz(g2[0]))
+				except:
+					timestamp = prev_timestamp + 1
+				prev_timestamp = timestamp
 				localtime = time.localtime(timestamp)
 				self.msgs[msgnum] = {
 					MSGNUM: msgnum,
