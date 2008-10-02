@@ -21,8 +21,7 @@ _rx_id = re.compile(r'<([^>]+)>')
 _rx_ws = re.compile(r'\s+')
 _rx_header = re.compile(r'^(\S+):\s*(.*)$')
 
-_rx_index1 = re.compile(r'^(\d+): (\S{20}) (.*)$')
-_rx_index2 = re.compile(r'^\s*([^;]+);(\S{20})\s?(.*)$')
+_rx_index = re.compile(r'^(\d+): (\S{20}) (.*)\n\s*([^;]+);(\S{20})\s?(.*)$')
 
 def _in(a, min, max):
 	if a > max: return max
@@ -99,34 +98,30 @@ class EzmlmIndex:
 
 	def populate(self, sub):
 		file = open(os.path.join(self.archdir, str(sub), 'index'))
-		l1 = file.readline()
-		l2 = file.readline()
+		linepair = file.readline() + file.readline()
 		prev_timestamp = 0
-		while l1 and l2:
-			l1 = _rx_index1.match(l1.rstrip())
-			l2 = _rx_index2.match(l2.rstrip())
-			if l1 and l2:
-				g1 = l1.groups()
-				g2 = l2.groups()
-				msgnum = int(g1[0])
+		while linepair:
+			match = _rx_index.match(linepair.rstrip())
+			if match:
+				g = match.groups()
+				msgnum = int(g[0])
 				try:
-					timestamp = rfc822.mktime_tz(rfc822.parsedate_tz(g2[0]))
+					timestamp = rfc822.mktime_tz(rfc822.parsedate_tz(g[3]))
 				except:
 					timestamp = prev_timestamp + 1
 				prev_timestamp = timestamp
 				localtime = time.localtime(timestamp)
 				self.msgs[msgnum] = {
 					MSGNUM: msgnum,
-					THREADID: g1[1],
-					SUBJECT: g1[2],
-					DATE: g2[0],
+					THREADID: g[1],
+					SUBJECT: g[2],
+					DATE: g[3],
 					TIMESTAMP: timestamp,
-					AUTHORID: g2[1],
-					AUTHOR: g2[2],
+					AUTHORID: g[4],
+					AUTHOR: g[5],
 					MONTH: localtime[0] * 100 + localtime[1],
 					}
-			l1 = file.readline()
-			l2 = file.readline()
+			linepair = file.readline() + file.readline()
 		file.close()
 
 class EzmlmArchive:
