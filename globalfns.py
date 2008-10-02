@@ -158,6 +158,8 @@ def sub_showpart(ctxt, part):
 	ctxt[FILENAME] = part.get_filename()
 	template = html('msg-' + type.replace('/', '-'))
 	if not template:
+		template = html('msg-' + type[:type.find('/')])
+	if not template:
 		template = html('msg-other')
 	write(template % ctxt)
 

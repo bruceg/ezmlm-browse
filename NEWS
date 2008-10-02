@@ -9,6 +9,8 @@ Changes in version 0.20
 
 - Fixed handling of messages with no date stamp.
 
+- Default templates now show attached images inline.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------

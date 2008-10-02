@@ -1,3 +1,7 @@
+- Allow downloading of image attachments even if allowraw = False
+
+- Fix handling of [msgnum-1] etc in templates.
+
 - Add a script to convert from config.py to ezmlm-browse.ini
 
 - Make the email mask option work per-list too
