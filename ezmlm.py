@@ -5,7 +5,9 @@ import re
 import rfc822
 import string
 import time
+import types
 
+import config
 from globals import *
 
 _rx_author = re.compile(r'^(\S+) (.+)$')
@@ -70,7 +72,19 @@ def _process_thread(thread, map):
 		msg['threads'] = _process_thread(thread[num], map)
 		list.append(msg)
 	return list
-	
+
+def _open_msg(archdir, num):
+	num = '%03d' % int(num)
+	f = open(os.path.join(archdir, num[:-2], num[-2:]))
+	return email.message_from_file(f)
+
+def _decode_header(header):
+	header = email.Header.decode_header(header)
+	return u''.join([ unicode(part,
+							  charset or config.charsets['default'],
+							  'replace')
+					 for part,charset in header ])
+
 class EzmlmIndex:
 	def __init__(self, listdir):
 		self.archdir = os.path.join(listdir, 'archive')
@@ -79,10 +93,19 @@ class EzmlmIndex:
 	def __getitem__(self, key):
 		key = int(key)
 		try:
-			return self.msgs[key]
+			msg = self.msgs[key]
 		except KeyError:
 			self.populate(key/100)
-			return self.msgs[key]
+			msg = self.msgs[key]
+		if type(msg[SUBJECT]) is not types.UnicodeType:
+			try:
+				msg[SUBJECT] = unicode(msg[SUBJECT], 'utf-8')
+				msg[AUTHOR] = unicode(msg[AUTHOR], 'utf-8')
+			except UnicodeDecodeError:
+				e = _open_msg(self.archdir, key)
+				msg[SUBJECT] = _decode_header(e['subject'])
+				# FIXME: msg[AUTHOR] = _decode_header(e['from'])
+		return msg
 
 	def populate(self, sub):
 		file = open(os.path.join(self.archdir, str(sub), 'index'))
@@ -169,9 +192,7 @@ class EzmlmArchive:
 		form[LASTMONTH] = lastmonth
 
 	def open(self, num):
-		num = '%03d' % int(num)
-		f = open(os.path.join(self.archdir, num[:-2], num[-2:]))
-		return email.message_from_file(f)
+		return _open_msg(self.archdir, num)
 
 	def month(self, month):
 		messages = { }
