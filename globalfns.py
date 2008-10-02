@@ -7,7 +7,8 @@ import time
 from globals import *
 import config
 
-write = sys.stdout.write
+def write(s):
+	sys.stdout.write(s.encode('utf-8'))
 
 ###############################################################################
 # Template fetching
