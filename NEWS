@@ -13,6 +13,9 @@ Changes in version 0.20
 
 - Default templates now show attached images inline.
 
+- Downloading of images is controlled separately from downloading the
+  whole raw message.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------

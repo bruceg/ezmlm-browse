@@ -14,6 +14,10 @@ try:
 except:
 	allowraw = False
 try:
+	allowraw_image = _config.getboolean('global', 'allowraw_image')
+except:
+	allowraw_image = True
+try:
 	mask_emails = _config.getboolean('global', 'mask_emails')
 except:
 	mask_emails = True

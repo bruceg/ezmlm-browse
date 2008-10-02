@@ -268,21 +268,36 @@ def setup_list():
 	if ctxt[TZ] and ctxt[TZ] <> 'None':
 		os.environ['TZ'] = ctxt[TZ]
 
+def die_no_download():
+	global ctxt
+	die(ctxt, "Downloading raw messages is administratively prohibited.")
+
+def dump_part(part):
+	global ctxt
+	if not config.allowraw \
+		   and not ( part.get_content_maintype() == 'image'
+					 and config.allowraw_image ):
+		die_no_download()
+	write('Content-Type: %s; charset=%s\r\n\r\n' % (
+		part.get_content_type(),
+		part.get_content_charset('us-ascii').lower()))
+	write(part.get_payload(decode=1))
+
 def main_path(pathstr):
 	# FIXME: handle ?part=#.#.#&filename=string
 	# and then convert sub_showmsg et al to use the same notation
 	global ctxt
-	if not config.allowraw:
-		die(ctxt, "Downloading raw messages is administratively prohibited.")
+	if not config.allowraw and not config.allowraw_image:
+		die_no_download()
 	while pathstr[0] == '/':
 		pathstr = pathstr[1:]
 	path = pathstr.split('/')
 	ctxt[LIST] = path[0]
-	setup_list()
 	try:
 		msgnum = int(path[1])
 	except:
 		die(ctxt, "Invalid path: " + pathstr)
+	setup_list()
 	msg = ctxt[EZMLM].open(msgnum)
 	if ctxt.has_key(PART):
 		parts = map(int, ctxt[PART].split('.'))
@@ -294,10 +309,7 @@ def main_path(pathstr):
 		while parts:
 			part = part.get_payload()[parts[0]]
 			parts = parts[1:]
-		write('Content-Type: %s; charset=%s\r\n\r\n' % (
-			part.get_content_type(),
-			part.get_content_charset('us-ascii').lower()))
-		write(part.get_payload(decode=1))
+		dump_part(part)
 	else:
 		try:
 			partnum = int(path[2])
@@ -306,11 +318,11 @@ def main_path(pathstr):
 				if partnum <= 0:
 					break
 				partnum -= 1
-			write('Content-Type: %s; charset=%s\r\n\r\n' % (
-				part.get_content_type(),
-				part.get_content_charset('us-ascii').lower()))
-			write(part.get_payload(decode=1))
+			dump_part(part)
 		except:
+			if not config.allowraw:
+				die_no_download()
+				
 			write('Content-Type: message/rfc822\r\n\r\n')
 			buf = msg.read(8192)
 			while buf:
