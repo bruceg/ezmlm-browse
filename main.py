@@ -354,7 +354,6 @@ def main():
 	ctxt[TZ] = ''
 	# Update with defaults from the config
 	ctxt.update(config.defaults)
-	ctxt[ALLOWRAW] = config.allowraw
 	# Update with all cookies
 	for c in Cookie.SimpleCookie(os.environ.get('HTTP_COOKIE', '')).values():
 		ctxt[c.key] = c.value
@@ -365,6 +364,7 @@ def main():
 	ctxt.update(form)
 
 	# Override certain context values based on configured settings
+	ctxt[ALLOWRAW] = config.allowraw
 	ctxt[FILESPREFIX] = config.filesprefix
 
 	try:
