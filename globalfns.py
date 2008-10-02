@@ -208,6 +208,16 @@ def sub_showmsg(ctxt, msgnum):
 	ctxt.push()
 	ctxt.update(ezmlm.index[msgnum])
 	msg = email.message_from_file(ezmlm.open(msgnum))
+	for name,value in msg.items():
+		if '=?' in value:
+			value = email.Header.decode_header(value)
+			value = ''.join([ unicode(part,
+									  charset or config.charsets['default'],
+									  'replace').encode('utf-8')
+							  for part,charset in value
+							  ])
+			msg.replace_header(name,value)
+	ctxt[SUBJECT] = msg[SUBJECT]
 	ctxt[MESSAGE] = msg
 	format_timestamp(ctxt, ctxt)
 	write(html('msg-header') % ctxt)
