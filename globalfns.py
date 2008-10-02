@@ -190,7 +190,6 @@ def rec_showpart(ctxt, part, partnum):
 	else:
 		write(html('msg-sep') % ctxt)
 		sub_showpart(ctxt, part)
-		return partnum + 1
 	return partnum
 
 def sub_showmsg(ctxt, msgnum):
