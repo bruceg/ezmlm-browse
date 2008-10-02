@@ -301,7 +301,7 @@ def main_path(pathstr):
 	msg = ctxt[EZMLM].open(msgnum)
 	if ctxt.has_key(PART):
 		parts = map(int, ctxt[PART].split('.'))
-		part = email.message_from_file(msg)
+		part = msg
 		# FIXME: What the heck am I supposed to be doing with these numbers?!?
 		if parts[0] != 1:
 			raise ValueError
@@ -313,7 +313,6 @@ def main_path(pathstr):
 	else:
 		try:
 			partnum = int(path[2])
-			msg = email.message_from_file(msg)
 			for part in msg.walk():
 				if partnum <= 0:
 					break

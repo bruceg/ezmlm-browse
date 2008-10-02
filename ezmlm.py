@@ -12,12 +12,8 @@ _rx_author = re.compile(r'^(\S+) (.+)$')
 _rx_thread = re.compile(r'^(\d+):(\S+) \[(\d+)\] (.+)$')
 _rx_subject = re.compile(r'^(\S+) (.+)$')
 _rx_message = re.compile(r'^(\d+):(\d+):(\S+) (.+)$')
-_rx_references = re.compile(r'\nReferences:[^\n]+(\n\s[^\n]+)*\n',
-							re.IGNORECASE)
-_rx_inreplyto = re.compile(r'\nIn-Reply-To:\s*<([^>]+)>', re.IGNORECASE)
 _rx_endofhdr = re.compile(r'^\s*$')
-_rx_messageid = re.compile(r'\nMessage-ID:\s*<([^>]+)>', re.IGNORECASE)
-_rx_id = re.compile(r'<([^>]+)>')
+_rx_id = re.compile(r'(<[^>]+>)')
 _rx_ws = re.compile(r'\s+')
 _rx_header = re.compile(r'^(\S+):\s*(.*)$')
 
@@ -42,14 +38,6 @@ month_names = {
 	11: 'November',
 	12: 'December'
 	}
-
-def _parse_references(str):
-	list = [ ]
-	match = _rx_id.search(str)
-	while match:
-		list.append(match.group(1))
-		match = _rx_id.search(str, match.end())
-	return list
 
 #def _thread_message(id, idmap, nummap, irtmap, replymap, refmap):
 def _thread_message(id, idmap, nummap, replymap):
@@ -182,7 +170,8 @@ class EzmlmArchive:
 
 	def open(self, num):
 		num = '%03d' % int(num)
-		return open(os.path.join(self.archdir, num[:-2], num[-2:]))
+		f = open(os.path.join(self.archdir, num[:-2], num[-2:]))
+		return email.message_from_file(f)
 
 	def month(self, month):
 		messages = { }
@@ -267,15 +256,16 @@ class EzmlmArchive:
 
 	def _parse_message(self, num):
 		# Result: message-id, in-reply-to, references
-		headers = self.open(num).read(self.headermax)
-		eoh = _rx_endofhdr.search(headers)
-		if eoh: headers = headers[:eoh.start()]
-		messageid = _rx_messageid.search(headers)
-		if messageid: messageid = messageid.group(1)
-		inreplyto = _rx_inreplyto.search(headers)
-		if inreplyto: inreplyto = inreplyto.group(1)
-		refs = _rx_references.search(headers)
-		if refs: refs = _parse_references(refs.group(0))
+		msg = self.open(num)
+		messageid = msg['message-id']
+		inreplyto = msg['in-reply-to']
+		if inreplyto:
+			inreplyto = _rx_id.search(inreplyto)
+			if inreplyto:
+				inreplyto = inreplyto.group(0)
+		refs = msg['references'] or []
+		if refs:
+			refs = _rx_ws.split(refs)
 		return (messageid, inreplyto, refs)
 
 	def thread_messages(self, messages):

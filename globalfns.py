@@ -207,7 +207,7 @@ def sub_showmsg(ctxt, msgnum):
 	ezmlm = ctxt[EZMLM]
 	ctxt.push()
 	ctxt.update(ezmlm.index[msgnum])
-	msg = email.message_from_file(ezmlm.open(msgnum))
+	msg = ezmlm.open(msgnum)
 	for name,value in msg.items():
 		if '=?' in value:
 			value = email.Header.decode_header(value)
