@@ -1,7 +1,7 @@
-<tr class=%(iif(row%2, "even", "odd"))srow>
-<td class=month>%(monthname(month))s</td>
-<td class=year>%(month/100)s</td>
-<td class=msgcount>[%(msgcount)s]</td>
+<tr class="%(iif(row%2, "even", "odd"))srow">
+<td class="month">%(monthname(month))s</td>
+<td class="year">%(month/100)s</td>
+<td class="msgcount">[%(msgcount)s]</td>
 <td>%(cmdlink("[by Thread]", "threadslink", "monthbythread",month=month))s</td>
 <td>%(cmdlink("[by Date]", "msgslink", "monthbydate",month=month))s</td>
 </tr>

@@ -1,38 +1,38 @@
-<form method=get>
-<input type=hidden name=list value="%(list)s">
-<input type=hidden name=cmd value=configure>
+<form method="get">
+<input type="hidden" name="list" value="%(list)s">
+<input type="hidden" name="cmd" value="configure">
 
-<table class=config>
+<table class="config">
 
 <tr>
-<td class=config-label>Lines per page:</td>
-<td class=config-value><input size=3 name=_perpage value=%(perpage)s></td>
+<td class="config-label">Lines per page:</td>
+<td class="config-value"><input size="3" name="_perpage" value="%(perpage)s"></td>
 </tr>
 
 <tr>
-<td class=config-label>Messages per page:</td>
-<td class=config-value><input size=3 name=_msgsperpage value=%(msgsperpage)s></td>
+<td class="config-label">Messages per page:</td>
+<td class="config-value"><input size="3" name="_msgsperpage" value="%(msgsperpage)s"></td>
 </tr>
 
 <tr>
-<td class=config-label>Style:</td>
-<td class=config-value>%(selectlist("_style", config.styles, style))s</td>
+<td class="config-label">Style:</td>
+<td class="config-value">%(selectlist("_style", config.styles, style))s</td>
 </tr>
 
 <tr>
-<td class=config-label>Word wrapping width</td>
-<td class=config-value><input size=3 name=_wrapwidth value=%(wrapwidth)s></td>
+<td class="config-label">Word wrapping width</td>
+<td class="config-value"><input size="3" name="_wrapwidth" value="%(wrapwidth)s"></td>
 <td>Set to "0" to disable word wrapping.</td>
 </tr>
 
 <tr>
-<td class=config-label>Timezone:</td>
-<td class=config-value>%(selectlist("_tz", timezones, tz))s</td>
+<td class="config-label">Timezone:</td>
+<td class="config-value">%(selectlist("_tz", timezones, tz))s</td>
 </tr>
 
 <tr>
-<td class=config-label>Preferred time format:</td>
-<td class=config-value>%(selectlist("_format_time", [
+<td class="config-label">Preferred time format:</td>
+<td class="config-value">%(selectlist("_format_time", [
 ("None", "Do not convert time"),
 ("%c", "Server default"),
 ("%a, %d %b %Y %H:%M:%S", "Sun, 20 Jun 2003 23:21:36"),
@@ -42,24 +42,24 @@
 </tr>
 
 <tr>
-<td class=config-label>View multipart messages as:</td>
-<td class=config-value>%(selectlist("_alt_part", [
+<td class="config-label">View multipart messages as:</td>
+<td class="config-value">%(selectlist("_alt_part", [
 ('text/plain', 'Plain Text'),
 ('text/html', 'HTML'),
 ], alt_part))s</td>
 </tr>
 
 <tr>
-<td class=config-label>"by Date" message order</td>
-<td class=config-value>%(selectlist("_date_sort", [
+<td class="config-label">"by Date" message order</td>
+<td class="config-value">%(selectlist("_date_sort", [
 ('ascending', 'Ascending (oldest to newest)'),
 ('descending', 'Descending (newest to oldest)'),
 ], date_sort))s</td>
 </table>
 
-<table border=0><tr>
-<td><input type=submit name="" value="Save Configuration"></td>
-<td><input type=reset value="Reset Values"></td>
+<table border="0"><tr>
+<td><input type="submit" name="" value="Save Configuration"></td>
+<td><input type="reset" value="Reset Values"></td>
 </table>
 
 </form>

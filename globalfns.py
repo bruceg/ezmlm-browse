@@ -104,7 +104,7 @@ def do_list(ctxt, name, perpage, values, peritem=None):
 	perpage = int(perpage)
 	ctxt.push()
 	ctxt[ROW] = 0
-	write('<table class=%s>' % name)
+	write('<table class="%s">' % name)
 	if perpage > 0:
 		page = int(ctxt.get(PAGE, 1)) - 1
 		pages = (len(values) + perpage - 1) / perpage
