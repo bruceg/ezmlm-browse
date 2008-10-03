@@ -12,7 +12,6 @@ from globals import *
 
 _rx_author = re.compile(r'^(\S+) (.+)$')
 _rx_thread = re.compile(r'^(\d+):(\S+) \[(\d+)\] (.+)$')
-_rx_subject = re.compile(r'^(\S+) (.+)$')
 _rx_message = re.compile(r'^(\d+):(\d+):(\S+) (.+)$')
 _rx_endofhdr = re.compile(r'^\s*$')
 _rx_id = re.compile(r'(<[^>]+>)')
@@ -215,7 +214,6 @@ class EzmlmArchive:
 		path = os.path.join(self.archdir, 'subjects',
 							threadid[:2], threadid[2:])
 		lines = map(string.strip, open(path).readlines())
-		subject = _rx_subject.match(lines[0]).group(2)
 		list = [ ]
 		for line in lines[1:]:
 			match = _rx_message.match(line)
@@ -225,6 +223,7 @@ class EzmlmArchive:
 				m = self.index[int(groups[0])]
 				m[MONTH] = int(groups[1])
 				list.append(m)
+		subject = list[0][SUBJECT]
 		return { SUBJECT: subject, THREADID: threadid, MESSAGES: list }
 
 	def threads(self, month):
