@@ -151,7 +151,7 @@ def sub_showpart(ctxt, part):
 	charset = config.charsets.get(charset, charset) or charset
 	ctxt[CHARSET] = charset
 	try:
-		body = unicode(body, charset, 'replace').encode('utf-8')
+		body = unicode(body, charset, 'replace')
 	except LookupError:
 		pass
 	ctxt[BODY] = body
@@ -214,7 +214,7 @@ def sub_showmsg(ctxt, msgnum):
 			value = email.Header.decode_header(value)
 			value = ''.join([ unicode(part,
 									  charset or config.charsets['default'],
-									  'replace').encode('utf-8')
+									  'replace')
 							  for part,charset in value
 							  ])
 			msg.replace_header(name,value)
