@@ -3,9 +3,11 @@ Changes in version 0.20
 
 - Ezmlm-browse now properly converts all messages to UTF-8 on output.
 
-- Switched configuration to use a config.ini file.
+- Switched configuration to use a ezmlm-browse.ini file.  An
+  ezmlm-browse-reconfig program is included to generate this .ini file
+  from an existing config.py file.
 
-- Add an ezmlm-browse-setup script to simplify installation.
+- Added an ezmlm-browse-setup script to simplify installation.
 
 - Fixed numbering of attachments.
 
