@@ -10,7 +10,6 @@ import types
 import config
 from globals import *
 
-_rx_author = re.compile(r'^(\S+) (.+)$')
 _rx_thread = re.compile(r'^(\d+):(\S+) \[(\d+)\] (.+)$')
 _rx_message = re.compile(r'^(\d+):(\d+):(\S+) (.+)$')
 _rx_endofhdr = re.compile(r'^\s*$')
@@ -327,19 +326,17 @@ class EzmlmArchive:
 	def author(self, authorid):
 		path = os.path.join(self.archdir, 'authors',
 							authorid[:2], authorid[2:])
-		file = open(path)
-		header = file.readline().strip()
-		name = None
-		m = _rx_author.match(header)
-		if m: name = m.group(2)
+		index = open(path)
+		index.readline()
 		msgs = [ ]
-		file = file.readlines()
-		file.reverse()
-		for line in file:
+		index = index.readlines()
+		index.reverse()
+		for line in index:
 			m = _rx_message.match(line.strip())
 			if m:
 				groups = m.groups()
 				m = self.index[int(groups[0])]
 				m[MONTH] = int(groups[1])
 				msgs.append(m)
+		name = msgs[0][AUTHOR]
 		return { AUTHORID: authorid, AUTHOR: name, MESSAGES: msgs }
