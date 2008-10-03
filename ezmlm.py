@@ -16,7 +16,8 @@ _rx_endofhdr = re.compile(r'^\s*$')
 _rx_id = re.compile(r'(<[^>]+>)')
 _rx_ws = re.compile(r'\s+')
 _rx_header = re.compile(r'^(\S+):\s*(.*)$')
-
+_rx_from1 = re.compile(r'(<[^>]+@[^>@]+>)')
+_rx_from2 = re.compile(r'(\([^>]+@[^>@]+\))')
 _rx_index = re.compile(r'^(\d+): (\S{20}) (.*)\n\s*([^;]+);(\S{20})\s?(.*)$')
 
 def _in(a, min, max):
@@ -100,9 +101,19 @@ class EzmlmIndex:
 				msg[SUBJECT] = unicode(msg[SUBJECT], 'utf-8')
 				msg[AUTHOR] = unicode(msg[AUTHOR], 'utf-8')
 			except UnicodeDecodeError:
-				e = _open_msg(self.archdir, key)
-				msg[SUBJECT] = _decode_header(e['subject'])
-				# FIXME: msg[AUTHOR] = _decode_header(e['from'])
+				email = _open_msg(self.archdir, key)
+				msg[SUBJECT] = _decode_header(email['subject'])
+				header = email['from']
+				m = _rx_from1.search(header)
+				if m:
+					header = header[:m.start()].rstrip()
+				else:
+					m = _rx_from1.search(header)
+					if m:
+						header = (header[:m.start()].rstrip()
+								  + ' '
+								  + header[m.end():].lstrip())
+				msg[AUTHOR] = _decode_header(header)
 		return msg
 
 	def populate(self, sub):
