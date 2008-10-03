@@ -25,7 +25,6 @@ Requirements:
 - ezmlm 0.53 + idx 0.40 or later.  If you are using an older version of
   ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" and
   "ezmlm-archive" commands on all lists you wish to browse.
-- bglibs to compile the wrapper program.
 
 Security Notes:
 
