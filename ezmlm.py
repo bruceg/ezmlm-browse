@@ -77,6 +77,18 @@ def _open_msg(archdir, num):
 	f = open(os.path.join(archdir, num[:-2], num[-2:]))
 	return email.message_from_file(f)
 
+def _open_subjects(archdir, threadid):
+	f = open(os.path.join(archdir, 'subjects', threadid[:2], threadid[2:]))
+	subject = f.readline()[21:].strip()
+	msgs = [ _rx_message.match(line) for line in f.readlines() ]
+	msgs = [ match.groups() for match in msgs if match ]
+	msgs = [ { MSGNUM: int(groups[0]),
+			   MONTH: int(groups[1]),
+			   AUTHORID: groups[2],
+			   AUTHOR: groups[3] }
+			 for groups in msgs ]
+	return subject, msgs
+
 def _decode_header(header):
 	header = email.Header.decode_header(header)
 	return u''.join([ unicode(part,
@@ -221,18 +233,9 @@ class EzmlmArchive:
 	def thread(self, threadid):
 		if '.' in threadid or '/' in threadid:
 			raise ValueError, "Thread ID contains invalid characters"
-		path = os.path.join(self.archdir, 'subjects',
-							threadid[:2], threadid[2:])
-		lines = map(string.strip, open(path).readlines())
-		list = [ ]
-		for line in lines[1:]:
-			match = _rx_message.match(line)
-			if match:
-				groups = match.groups()
-				n = int(groups[0])
-				m = self.index[int(groups[0])]
-				m[MONTH] = int(groups[1])
-				list.append(m)
+		subject,list = _open_subjects(self.archdir, threadid)
+		for item in list:
+			item.update(self.index[item[MSGNUM]])
 		subject = list[0][SUBJECT]
 		return { SUBJECT: subject, THREADID: threadid, MESSAGES: list }
 
@@ -255,6 +258,13 @@ class EzmlmArchive:
 			SUBJECT: match[3]
 			}
 				 for match in list ]
+		for item in list:
+			try:
+				item[SUBJECT] = unicode(item[SUBJECT], 'utf-8')
+			except UnicodeDecodeError:
+				subject,msgs = _open_subjects(self.archdir, item[THREADID])
+				msg = self.index[msgs[0][MSGNUM]]
+				item[SUBJECT] = msg[SUBJECT]
 		return list
 
 	def search(self, terms):
