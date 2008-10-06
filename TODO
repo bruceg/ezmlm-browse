@@ -1,7 +1,3 @@
-- Fix display of subjects where the index contains invalid UTF-8
-  - If the authors or thread index is invalid, read the first message
-    listed in the index
-
 - Fix handling of [msgnum-1] etc in templates.
 
 - Add a script to convert from config.py to ezmlm-browse.ini
