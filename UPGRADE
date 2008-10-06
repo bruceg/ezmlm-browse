@@ -3,7 +3,9 @@ Upgrading from version 0.13 or earlier
 
 In version 0.20, the configuration file changed from a Python source
 config.py to an INI file named ezmlm-browse.ini.  You will need to
-create this file as appropriate.
+create this file by running:
+
+	ezmlm-browse-reconfig /path/to/my/config.py
 
 Upgrading from version 0.11 and earlier
 ---------------------------------------
