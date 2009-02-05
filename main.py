@@ -2,6 +2,7 @@ import cgitb
 cgitb.enable()
 import cgi
 import email
+import imp
 import os
 import re
 import sys
@@ -314,6 +315,15 @@ def main_path(pathstr):
 				buf = msg.read(8192)
 	sys.exit(0)
 
+def import_command(command):
+	name = 'commands.' + command
+	for base in sys.path[:2]:
+		filename = base + '/commands/' + command + '.py'
+		if os.path.exists(filename):
+			return imp.load_module(name, open(filename, 'r'), filename,
+								   ('', '', imp.PY_SOURCE))
+	raise ImportError, "Could not locate command: " + command
+
 def main_form():
 	global ctxt
 	setup_list()
@@ -323,7 +333,7 @@ def main_form():
 	if not ctxt[LIST]:
 		ctxt[COMMAND] = 'lists'
 	try:
-		module = __import__('commands/' + ctxt[COMMAND])
+		module = import_command(ctxt[COMMAND])
 	except ImportError:
 		die(ctxt, "Invalid command")
 	module.do(ctxt)
