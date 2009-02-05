@@ -3,6 +3,8 @@ Changes in version 0.20
 
 - Ezmlm-browse now properly converts all messages to UTF-8 on output.
 
+- Fixed compatibility with Python 2.6
+
 - Switched configuration to use a ezmlm-browse.ini file.  An
   ezmlm-browse-reconfig program is included to generate this .ini file
   from an existing config.py file.
