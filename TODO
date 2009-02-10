@@ -1,7 +1,5 @@
 - Fix handling of [msgnum-1] etc in templates.
 
-- Add a script to convert from config.py to ezmlm-browse.ini
-
 - Make the allowraw_image feature generic for other types too.
 
 - Make the email mask option work per-list too
