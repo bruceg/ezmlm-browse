@@ -7,7 +7,7 @@ WEBSITE = 'untroubled.org'
 
 # If LISTSUB is set, makedist will add a note regarding mailing list
 # subscription.
-LISTSUB = 'bgware-subscribe@lists.untroubled.org'
+LISTSUB = 'ezmlm-subscribe@lists.untroubled.org'
 LISTURL = 'http://lists.untroubled.org/?list=bgware'
 
 # Set EXTRAS to a list of any extra files that should go into the
@@ -28,6 +28,7 @@ RPMUPLOAD = [
 # Set LISTS to the mailing list(s) to send the announcement to
 LISTS = [
 	'bgware@lists.untroubled.org',
+	'ezmlm@lists.untroubled.org',
 	'ezmlm@list.cr.yp.to',
 	]
 
