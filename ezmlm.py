@@ -263,8 +263,9 @@ class EzmlmArchive:
 				item[SUBJECT] = unicode(item[SUBJECT], 'utf-8')
 			except UnicodeDecodeError:
 				subject,msgs = _open_subjects(self.archdir, item[THREADID])
-				msg = self.index[msgs[0][MSGNUM]]
-				item[SUBJECT] = msg[SUBJECT]
+				if len(msgs) > 0:
+					msg = self.index[msgs[0][MSGNUM]]
+					item[SUBJECT] = msg[SUBJECT]
 		return list
 
 	def search(self, terms):
