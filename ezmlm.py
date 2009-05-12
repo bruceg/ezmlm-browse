@@ -89,11 +89,14 @@ def _open_subjects(archdir, threadid):
 			 for groups in msgs ]
 	return subject, msgs
 
+def _decode_header_part(part, charset):
+	if not charset or charset == 'x-unknown':
+		charset = config.charsets['default']
+	return unicode(part, charset, 'replace')
+
 def _decode_header(header):
 	header = email.Header.decode_header(header)
-	return u''.join([ unicode(part,
-							  charset or config.charsets['default'],
-							  'replace')
+	return u''.join([ _decode_header_part(part, charset)
 					 for part,charset in header ])
 
 class EzmlmIndex:
