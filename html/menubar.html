@@ -1,12 +1,12 @@
 <div class="menubar">
 %(relink("[Lists]", "menu-lists"))s
 %(cmdlink("[Configure]", "menu-config", "configure"))s
-%(optlink("[<<]", "menu-first", first_month<>month, idxcmd, month=first_month))s
-%(optlink("[<]", "menu-prev", prev_month<>month, idxcmd, month=prev_month))s
+%(optlink("[&lt;&lt;]", "menu-first", first_month<>month, idxcmd, month=first_month))s
+%(optlink("[&lt;]", "menu-prev", prev_month<>month, idxcmd, month=prev_month))s
 %(optlink("[by Thread]", "menu-bythread", month and cmd<>"monthbythread", "monthbythread", month=month))s
 %(optlink("[by Date]", "menu-bydate", month and cmd<>"monthbydate", "monthbydate", month=month))s
-%(optlink("[>]", "menu-next", next_month<>month, idxcmd, month=next_month))s
-%(optlink("[>>]", "menu-last", last_month<>month, idxcmd, month=last_month))s
+%(optlink("[&gt;]", "menu-next", next_month<>month, idxcmd, month=next_month))s
+%(optlink("[&gt;&gt;]", "menu-last", last_month<>month, idxcmd, month=last_month))s
 %(cmdlink("[Months]", "menu-months", "months"))s
 %(cmdlink("[Search]", "menu-search", "search"))s
 <a class="menu-subscribe" href="mailto:%(listsub)s?subject=Just click SEND">[eSubscribe]</a>

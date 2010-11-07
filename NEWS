@@ -20,6 +20,8 @@ Changes in version 0.20
 - Downloading of images is controlled separately from downloading the
   whole raw message.
 
+- Fixed broken HTML in pager and menu bar links.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------
