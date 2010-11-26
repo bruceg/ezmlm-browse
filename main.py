@@ -2,7 +2,6 @@ import cgitb
 cgitb.enable()
 import cgi
 import email
-import imp
 import os
 import re
 import sys
@@ -331,13 +330,11 @@ def main_path(pathstr):
 	sys.exit(0)
 
 def import_command(command):
-	name = 'commands.' + command
-	for base in sys.path[:2]:
-		filename = base + '/commands/' + command + '.py'
-		if os.path.exists(filename):
-			return imp.load_module(name, open(filename, 'r'), filename,
-								   ('', '', imp.PY_SOURCE))
-	raise ImportError, "Could not locate command: " + command
+	commands = __import__('commands', fromlist=[command])
+	try:
+		return getattr(commands, command)
+	except AttributeError:
+		raise ImportError, "Could not locate command: " + command
 
 def main_form():
 	global ctxt
