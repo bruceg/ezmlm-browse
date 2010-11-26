@@ -1,0 +1,17 @@
+files = [ f
+	for f in glob('*.py')
+	if not os.path.exists(f[:-3]+'=py') \
+	   and f != 'python-head.py'
+	]
+files.append('version.py')
+files.extend(glob('*/*.py'))
+files.sort()
+dependon(files)
+files = map(lambda filename:filename[:-3]+'.pyc', files)
+dependon(files)
+htmls = glob('html/*')
+htmls.sort()
+dependon(htmls)
+: Makefile
+rm -f %(target)s
+zip -9 %(target)s %(deplist_pre)s

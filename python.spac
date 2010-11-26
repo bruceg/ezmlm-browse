@@ -1,8 +1,0 @@
-files = [ f
-	for f in glob('*.py')
-	if not os.path.exists(f[:-3]+'=py')
-	]
-files.append('version.py')
-files.extend(glob('*/*.py'))
-files = map(lambda filename:filename[:-3]+'.pyc', files)
-dependon(files)
