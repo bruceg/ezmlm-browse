@@ -3,6 +3,7 @@ import os
 import re
 import sys
 import time
+import zipfile
 
 from globals import *
 import config
@@ -15,20 +16,27 @@ def write(s):
 _template_cache = { }
 _template_path = sys.path[:2]
 _rx_percent = re.compile('%([^(])')
+_template_zipfile = None
 def template(filename):
 	global _template_cache
 	global _template_path
+	global _template_zipfile
 	try:
 		f = _template_cache[filename]
 	except KeyError:
 		n = os.path.join('html', filename.replace('/', ':'))
 		f = ''
-		for dir in _template_path:
-			try:
-				f = open(os.path.join(dir, n)).read()
-				break
-			except IOError:
-				pass
+		if not _template_zipfile:
+			_template_zipfile = zipfile.ZipFile('ezmlm-browse.zip')
+		try:
+			f = _template_zipfile.open(n).read()
+		except KeyError:
+			for dir in _template_path:
+				try:
+					f = open(os.path.join(dir, n)).read()
+					break
+				except IOError:
+					pass
 		_template_cache[filename] = f
 	return f
 
