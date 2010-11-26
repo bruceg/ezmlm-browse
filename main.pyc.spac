@@ -1,2 +1,0 @@
-: main.py version.py
-./compilepy %(base)s

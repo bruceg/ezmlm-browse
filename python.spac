@@ -3,6 +3,5 @@ files = [ f
 	if not os.path.exists(f[:-3]+'=py')
 	]
 files.extend(glob('*/*.py'))
-files.append('version.py')
 files = map(lambda filename:filename[:-3]+'.pyc', files)
 dependon(files)
