@@ -4,7 +4,7 @@ import sys
 
 _config = SafeConfigParser()
 _config.read([ os.path.join(d,'ezmlm-browse.ini')
-			   for d in sys.path[:2] ])
+			   for d in ['']+sys.path[:2] ])
 
 basedir = _config.get('global', 'basedir')
 basehost = _config.get('global', 'basehost')

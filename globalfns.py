@@ -22,22 +22,20 @@ def template(filename):
 	global _template_path
 	global _template_zipfile
 	try:
-		f = _template_cache[filename]
+		return _template_cache[filename]
 	except KeyError:
-		n = os.path.join('html', filename.replace('/', ':'))
-		f = ''
+		pass
+	n = os.path.join('html', filename.replace('/', ':'))
+	try:
+		f = open(n).read()
+	except IOError:
 		if not _template_zipfile:
-			_template_zipfile = zipfile.ZipFile('ezmlm-browse.zip')
+			_template_zipfile = zipfile.ZipFile(sys.argv[0])
 		try:
 			f = _template_zipfile.open(n).read()
 		except KeyError:
-			for dir in _template_path:
-				try:
-					f = open(os.path.join(dir, n)).read()
-					break
-				except IOError:
-					pass
-		_template_cache[filename] = f
+			f = ''
+	_template_cache[filename] = f
 	return f
 
 def html(name):
