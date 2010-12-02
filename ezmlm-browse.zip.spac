@@ -7,9 +7,16 @@ files.append('version.py')
 files.extend(glob('*/*.py'))
 files.extend(map(lambda filename:filename[:-3]+'.pyc', files))
 files.sort()
-htmls = glob('html/*')
-htmls.sort()
-dependon(files + htmls)
+dependon(files)
+
+files = glob('html/*')
+files.sort()
+dependon(files)
+
+files = glob('files/*')
+files.sort()
+dependon(files)
+
 : Makefile
 rm -f %(target)s
 zip -q9 %(target)s %(deplist_pre)s

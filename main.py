@@ -7,6 +7,7 @@ import re
 import sys
 import time
 import types
+import zipfile
 import Cookie
 
 import ezmlm
@@ -289,8 +290,7 @@ def main_path(pathstr):
 	global ctxt
 	if not config.allowraw and not config.allowraw_image:
 		die_no_download()
-	while pathstr[0] == '/':
-		pathstr = pathstr[1:]
+	pathstr = pathstr.lstrip('/')
 	path = pathstr.split('/')
 	ctxt[LIST] = path[0]
 	try:
@@ -329,6 +329,35 @@ def main_path(pathstr):
 				buf = msg.read(8192)
 	sys.exit(0)
 
+file_content_types = {
+	'css': 'text/css',
+	'png': 'image/png',
+	'gif': 'image/gif',
+	'jpg': 'image/jpeg',
+	'jpeg': 'image/jpeg',
+	}
+
+def main_file(filename):
+	path = os.path.join('files', filename)
+	try:
+		st = os.stat(path)
+		timestamp = st.st_mtime
+		data = open(path).read()
+	except OSError:
+		zf = zipfile.ZipFile(sys.argv[0])
+		data = zf.open(path).read()
+		timestamp = time.mktime(zf.getinfo(path).date_time + (0, 0, 0))
+	timestamp = time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime(timestamp))
+	ext = filename[filename.rindex('.')+1:].lower()
+	ct = file_content_types[ext]
+	sys.stdout.write('Content-Type: %s\r\n'
+					 'Content-Length: %i\r\n'
+					 'Last-Modified: %s\r\n'
+					 '\r\n' % ( ct, len(data), timestamp ))
+	sys.stdout.write(data)
+	sys.stdout.flush()
+	sys.exit(0)
+
 def import_command(command):
 	commands = __import__('commands', fromlist=[command])
 	try:
@@ -351,6 +380,14 @@ def main_form():
 	module.do(ctxt)
 
 def main():
+	try:
+		path = os.environ['PATH_INFO']
+	except KeyError:
+		path = None
+	else:
+		if path.startswith('/files/'):
+			main_file(path[7:])
+
 	update_global_context()
 	global ctxt
 	ctxt = context.Context()
@@ -385,9 +422,7 @@ def main():
 	ctxt[ALLOWRAW] = config.allowraw
 	ctxt[FILESPREFIX] = config.filesprefix
 
-	try:
-		path = os.environ['PATH_INFO']
+	if path is not None:
 		main_path(path)
-	except KeyError:
-		pass
-	main_form()
+	else:
+		main_form()
