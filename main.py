@@ -420,7 +420,7 @@ def main():
 
 	# Override certain context values based on configured settings
 	ctxt[ALLOWRAW] = config.allowraw
-	ctxt[FILESPREFIX] = config.filesprefix
+	ctxt[FILESPREFIX] = config.filesprefix or os.environ['SCRIPT_NAME'] + '/files/'
 
 	if path is not None:
 		main_path(path)
