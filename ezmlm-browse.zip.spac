@@ -1,9 +1,15 @@
-files = [ f
-	for f in glob('*.py')
-	if not os.path.exists(f[:-3]+'=py') \
-	   and f != 'python-head.py'
+files = [
+	'config.py',
+	'context.py',
+	'ezmlm.py',
+	'feedgen.py',
+	'globalfns.py',
+	'globals.py',
+	'main.py',
+	'timezones.py',
+	'version.py',
+	'__main__.py',
 	]
-files.append('version.py')
 files.extend(glob('*/*.py'))
 files.extend(map(lambda filename:filename[:-3]+'.pyc', files))
 files.sort()
