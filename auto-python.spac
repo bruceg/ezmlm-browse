@@ -1,2 +1,0 @@
-: which
-( ./which python2 || ./which python ) >$@
