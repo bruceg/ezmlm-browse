@@ -1,7 +1,9 @@
-Building the Sources:
+Building the Sources
+====================
 
-- Unpack ezmlm-browse into a non-web-visible directory.  This is the
-  directory from which ezmlm-browse will execute.
+- Unpack the ezmlm-browse sources into a non-web-visible directory.  If
+  you are using the setuid wrapper (see below), this is the directory
+  from which ezmlm-browse will execute.
 
 - Make sure all the conf-* files have values appropriate for your
   system (they contain notes about what they are used for).  They are
@@ -13,65 +15,57 @@ Building the Sources:
 
 - Run "make".
 
-Simple Installation:
+Simple Installation
+===================
 
-- Run:
+- As a user that has read access to the list archives, run:
 
-  ./ezmlm-browse-conf --apache DESTPATH TARGET.cgi LISTPATH HOSTNAME
+  ./ezmlm-browse-setup --apache DESTPATH TARGET.cgi
 
   where: DESTPATH is the destination directory into which the files will
-  be installed, TARGET.cgi is the CGI filename to install, LISTPATH is
-  the full path name to the directory containing the mailing lists, and
-  HOSTNAME is the domain name on which the mailing lists receive email.
+  be installed, TARGET.cgi is the CGI filename to install.  For the
+  simplest usage this target will be "index.cgi", but if you have other
+  CGI scripts in the same directory you may name it something else.
 
-  This script does all the steps in the recommended installation below.
+Generic Installation
+====================
 
-Recommended Installation:
+- Copy either "ezmlm-browse" (if your web server is using Apache suexec
+  or equivalent) or "wrapper" (for setuid execution) into a location
+  where CGI programs may be executed.  Usually this is either something
+  in a "cgi-bin" directory or a file elsewhere named "something.cgi".
+  The destination name does not need to be either "wrapper" or
+  "ezmlm-browse" as the script will automatically determine its own name
+  for the links it creates.
 
-- Create a new subdirectory in your web directory and change into it.
+- Make sure the resulting program is executable and owned by the a that
+  has read access to the list archives.
 
-- Symlink "browse.cgi" into that directory as "index.cgi" if your site
-  is using Apache suexec or equivalent.  Otherwise symlink "wrapper" in
-  as "index.cgi" and make it setuid.
-
-- Symlink the "files" directory in as-is.
+- If your web server runs as a user that cannot read the mailing list
+  archives (normally true) and does not use the Apache suexec or
+  equivalent module, make the copy of the "wrapper" program setuid to a
+  user that has read access to the mailing list archive files.  Do *NOT*
+  make any Python script setuid.
 
 - Copy in the "ezmlm-browse.ini" file and edit it as appropriate for
-  your site and lists.  Set "filesprefix" to "files/".
+  your site and lists.
 
-- If using Apache, make sure CGI execution is enabled in that directory
-  by adding the following lines to a ".htaccess" file in the same
-  directory:
+- If using Apache with the program in a directory other then "cgi-bin",
+  make sure CGI execution is enabled in that directory by adding the
+  following lines to a ".htaccess" file in the same directory:
+
 	Options +ExecCGI
 	AddHandler cgi-script .cgi
 	DirectoryIndex index.cgi
+
   Other server software should be similarly configured.
 
-Generic Installation:
+Configuration
+=============
 
-- Symlink either "wrapper" or "browse.cgi" into a location where CGI
-  programs may be executed.  Usually this is either something in a
-  "cgi-bin" directory or a file elsewhere named "something.cgi".  The
-  destination name does not need to be either "wrapper" or "browse.cgi"
-  as the script will automatically determine its own name for the links
-  it creates.
-
-- Symlink the "files" directory into a web-visible directory, and make
-  note of that location for the configuration below.  The visible name
-  does not need to remain as "files".
-
-Configuration:
-
-- If necessary, make the "wrapper" program setuid to whatever user has
-  read access to the mailing list archive files.  Do *NOT* make any
-  Python script setuid.  This is necessary if the web server process
-  does not have read access to the web archives and is not using the
-  Apache suexec module or equivalent.
-
-- Edit ezmlm-browse.ini to declare which mailing lists are visible to
-  the web, and set the other defaults as appropriate (most notably, the
-  web path to the "files" directory installed above should go in
-  FILESPREFIX).
+- Edit ezmlm-browse.ini in the destination directory to declare which
+  mailing lists are visible to the web, and set the other defaults as
+  appropriate.
 
 - Mailing lists should have the ezmlm-make "-i" option enabled to keep
   the necessary indices up to date.  If this is not enabled, run the
