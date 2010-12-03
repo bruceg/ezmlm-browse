@@ -1,0 +1,3 @@
+: python-head.py ezmlm-browse.zip
+cat %(deplist)s > $@
+chmod +x $@

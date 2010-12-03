@@ -9,8 +9,10 @@ auto_python.c
 ChangeLog
 compile
 compilepy
+ezmlm-browse
 ezmlm-browse-reconfig
 ezmlm-browse-setup
+ezmlm-browse.zip
 load
 Makefile
 python-head.py
