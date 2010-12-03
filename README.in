@@ -16,14 +16,15 @@ To subscribe, send an email to:
 A mailing list archive is available at:
 	http://lists.untroubled.org/?list=bgware
 
-Development versions of @PACKAGE@ are available via Subversion at:
-	svn://bruce-guenter.dyndns.org/@PACKAGE@/trunk
+Development versions of @PACKAGE@ are available at GitHub:
+	https://github.com/bruceg/@PACKAGE@
 
 Requirements:
 
 - Python 2.6 or later
-- ezmlm 0.53 + idx 0.40 or later.  If you are using an older version of
-  ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" and
+
+- ezmlm-idx 0.53 + idx 0.40 or later.  If you are using an older version
+  of ezmlm-idx, you MUST upgrade and run the "ezmlm-idx" and
   "ezmlm-archive" commands on all lists you wish to browse.
 
 Security Notes:
@@ -40,6 +41,8 @@ Security Notes:
     an attacker to execute code as that user.
 
   - Use the Apache suexec module.
+
+- See the INSTALL document for more details.
 
 This program is Copyright(C) @YEAR@ Bruce Guenter, and may be copied
 according to the GNU GENERAL PUBLIC LICENSE (GPL) Version 2 or a later
