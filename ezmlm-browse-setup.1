@@ -21,18 +21,8 @@ necessarily a directory which the web server can access.
 is the filename for the CGI script in the target directory.  This will
 frequently be
 .I index.cgi
-if there is nothing else in the directory.
-.P
-If
-.I LISTPATH
-and
-.I HOSTNAME
-are present on the command line, then a sample configuration file is
-written to the destination directory.
-.I LISTPATH
-is the full path to the parent directory to the mailing list archives.
-.I HOSTNAME
-is the domain name on which the mailing lists receive messages.
+if there is nothing else in the directory.  A sample configuration file
+is written to the destination directory if it is not already present.
 .SH OPTIONS
 .TP
 .B \-\-apache
