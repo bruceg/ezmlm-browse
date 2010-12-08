@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
+Changes in version 0.21
+
+Development of this version has been sponsored by FutureQuest, Inc.
+ossi@FutureQuest.net  http://www.FutureQuest.net/
+-------------------------------------------------------------------------------
 Changes in version 0.20
 
 - Ezmlm-browse now properly converts all messages to UTF-8 on output.
