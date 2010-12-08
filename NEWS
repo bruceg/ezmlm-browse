@@ -1,6 +1,8 @@
 -------------------------------------------------------------------------------
 Changes in version 0.21
 
+- Fixed a couple of bugs in RSS/Atom feed generation.
+
 Development of this version has been sponsored by FutureQuest, Inc.
 ossi@FutureQuest.net  http://www.FutureQuest.net/
 -------------------------------------------------------------------------------

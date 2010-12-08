@@ -1,13 +1,12 @@
 from globals import *
 from globalfns import *
-import email
 import feedgen
 
 def rec_gettext(part):
 	if part.is_multipart():
 		return '\n'.join([ rec_gettext(p)
 						   for p in part.get_payload() ])
-	if part.get_type('text/plain') == 'text/plain':
+	if part.get_content_type() == 'text/plain':
 		return part.get_payload(decode=1)
 	return ''
 
@@ -27,6 +26,6 @@ def do(ctxt):
 			pass
 		num -= 1
 	for msg in msgs:
-		e = email.message_from_file(ctxt[EZMLM].open(int(msg[MSGNUM])))
+		e = ctxt[EZMLM].open(int(msg[MSGNUM]))
 		msg[BODY] = rec_gettext(e).strip()
 	feedtype.generate(ctxt, msgs)
