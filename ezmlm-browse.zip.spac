@@ -15,7 +15,7 @@ files.extend(map(lambda filename:filename[:-3]+'.pyc', files))
 files.sort()
 dependon(files)
 
-files = glob('html/*')
+files = [ f for f in glob('html/*.html') if f[-1] != '~' ]
 files.sort()
 dependon(files)
 
