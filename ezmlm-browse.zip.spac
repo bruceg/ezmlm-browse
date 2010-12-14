@@ -10,7 +10,7 @@ files = [
 	'version.py',
 	'__main__.py',
 	]
-files.extend(glob('*/*.py'))
+files.extend(glob('commands/*.py'))
 files.extend(map(lambda filename:filename[:-3]+'.pyc', files))
 files.sort()
 dependon(files)
