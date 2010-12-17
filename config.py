@@ -70,9 +70,13 @@ defaults = {
 defaults.update(dict(_config.items('defaults')))
 
 def _parse_archive(config, section, name):
+	global basedir, basehost
 	archive = dict(config.items(section))
 	archive.setdefault('listdesc', name)
-	archive.setdefault('listdir', os.path.join(basedir, name))
+	if archive.has_key('listdir'):
+		archive['listdir'] = os.path.join(basedir, archive['listdir'])
+	else:
+		archive['listdir'] = os.path.join(basedir, name)
 	archive.setdefault('listemail', '%s@%s' % (name,basehost))
 	archive.setdefault('listsub', '%s-subscribe@%s' % (name,basehost))
 	return archive

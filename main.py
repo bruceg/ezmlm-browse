@@ -16,20 +16,6 @@ import context
 import config
 
 ###############################################################################
-# Fixup configuration values
-def fixup_config():
-	for name in config.archives.keys():
-		l = config.archives[name]
-		if l.has_key(LISTDIR):
-			l[LISTDIR] = os.path.join(config.basedir, l[LISTDIR])
-		else:
-			l[LISTDIR] = os.path.join(config.basedir, name)
-		if not l.has_key(LISTEMAIL):
-			l[LISTEMAIL] = '%s@%s' % (name, config.basehost)
-		if not l.has_key(LISTSUB):
-			l[LISTSUB] = '%s-subscribe@%s' % (name, config.basehost)
-
-###############################################################################
 # Main routine
 ###############################################################################
 def load_form():
@@ -185,7 +171,6 @@ def main():
 	# Update with all cookies
 	for c in Cookie.SimpleCookie(os.environ.get('HTTP_COOKIE', '')).values():
 		ctxt[c.key] = c.value
-	fixup_config()
 
 	form = context.form = load_form()
 	ctxt.update(form)
