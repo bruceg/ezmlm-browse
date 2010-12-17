@@ -15,9 +15,6 @@ import context
 
 import config
 
-ctxt = None
-form = None
-
 ###############################################################################
 # Fixup configuration values
 def fixup_config():
@@ -48,8 +45,7 @@ def load_form():
 			form[key] = item.value
 	return form
 
-def setup_list():
-	global ctxt
+def setup_list(ctxt):
 	list = ctxt[LIST]
 	if list:
 		try:
@@ -66,27 +62,24 @@ def setup_list():
 	if ctxt[TZ] and ctxt[TZ] <> 'None':
 		os.environ['TZ'] = ctxt[TZ]
 
-def die_no_download():
-	global ctxt
+def die_no_download(ctxt):
 	die(ctxt, "Downloading raw messages is administratively prohibited.")
 
-def dump_part(part):
-	global ctxt
+def dump_part(ctxt, part):
 	if not config.allowraw \
 		   and not ( part.get_content_maintype() == 'image'
 					 and config.allowraw_image ):
-		die_no_download()
+		die_no_download(ctxt)
 	write('Content-Type: %s; charset=%s\r\n\r\n' % (
 		part.get_content_type(),
 		part.get_content_charset('us-ascii').lower()))
 	write(part.get_payload(decode=1))
 
-def main_path(pathstr):
+def main_path(ctxt, pathstr):
 	# FIXME: handle ?part=#.#.#&filename=string
 	# and then convert sub_showmsg et al to use the same notation
-	global ctxt
 	if not config.allowraw and not config.allowraw_image:
-		die_no_download()
+		die_no_download(ctxt)
 	pathstr = pathstr.lstrip('/')
 	path = pathstr.split('/')
 	ctxt[LIST] = path[0]
@@ -94,7 +87,7 @@ def main_path(pathstr):
 		msgnum = int(path[1])
 	except:
 		die(ctxt, "Invalid path: " + pathstr)
-	setup_list()
+	setup_list(ctxt)
 	msg = ctxt[EZMLM].open(msgnum)
 	if ctxt.has_key(PART):
 		parts = map(int, ctxt[PART].split('.'))
@@ -106,7 +99,7 @@ def main_path(pathstr):
 		while parts:
 			part = part.get_payload()[parts[0]]
 			parts = parts[1:]
-		dump_part(part)
+		dump_part(ctxt, part)
 	else:
 		try:
 			partnum = int(path[2])
@@ -114,10 +107,10 @@ def main_path(pathstr):
 				if partnum <= 0:
 					break
 				partnum -= 1
-			dump_part(part)
+			dump_part(ctxt, part)
 		except:
 			if not config.allowraw:
-				die_no_download()
+				die_no_download(ctxt)
 				
 			write('Content-Type: message/rfc822\r\n\r\n')
 			buf = msg.read(8192)
@@ -162,9 +155,8 @@ def import_command(command):
 	except AttributeError:
 		raise ImportError, "Could not locate command: " + command
 
-def main_form():
-	global ctxt
-	setup_list()
+def main_form(ctxt):
+	setup_list(ctxt)
 	if ctxt.has_key('command'): ctxt[COMMAND] = ctxt['command']
 	if '/' in ctxt[COMMAND]:
 		die(ctxt, "Invalid command")
@@ -185,7 +177,6 @@ def main():
 		if path.startswith('/files/'):
 			main_file(path[7:])
 
-	global ctxt
 	ctxt = context.ctxt = context.Context()
 	# Insert the environment (CGI) variables
 	ctxt.update(os.environ)
@@ -196,7 +187,6 @@ def main():
 		ctxt[c.key] = c.value
 	fixup_config()
 
-	global form
 	form = context.form = load_form()
 	ctxt.update(form)
 
@@ -205,6 +195,6 @@ def main():
 	ctxt[FILESPREFIX] = config.filesprefix or os.environ['SCRIPT_NAME'] + '/files/'
 
 	if path is not None:
-		main_path(path)
+		main_path(ctxt, path)
 	else:
-		main_form()
+		main_form(ctxt)
