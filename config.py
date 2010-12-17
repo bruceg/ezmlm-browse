@@ -50,7 +50,24 @@ charsets = {
 if 'charsets' in _config.sections():
 	charsets.update(dict(_config.items('charsets')))
 
-defaults = dict(_config.items('defaults'))
+# Hard-coded defaults
+defaults = {
+	'alt_part': 'text/plain',
+	'cmd': 'months',
+	'date_sort': 'ascending',
+	'feedmsgs': 10,
+	'feedtype': 'atom',
+	'format_time': '',
+	'list': '',
+	'msgsperpage': 10,
+	'perpage': 20,
+	'style': '',
+	'wrapwidth': 0,
+	'terms': '',
+	'tz': '',
+	}
+
+defaults.update(dict(_config.items('defaults')))
 
 def _parse_archive(config, section, name):
 	archive = dict(config.items(section))

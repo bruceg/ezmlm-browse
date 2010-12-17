@@ -393,20 +393,6 @@ def main():
 	ctxt = context.Context()
 	# Insert the environment (CGI) variables
 	ctxt.update(os.environ)
-	# Set up hard-coded defaults
-	ctxt[ALTPART] = 'text/plain'
-	ctxt[COMMAND] = 'months'
-	ctxt[DATESORT] = 'ascending'
-	ctxt[FEEDMSGS] = 10
-	ctxt[FEEDTYPE] = 'atom'
-	ctxt[FORMATTIME] = ''
-	ctxt[LIST] = ''
-	ctxt[MSGSPERPAGE] = 10
-	ctxt[PERPAGE] = 20
-	ctxt[STYLE] = ''
-	ctxt[WRAPWIDTH] = 0
-	ctxt[TERMS] = ''
-	ctxt[TZ] = ''
 	# Update with defaults from the config
 	ctxt.update(config.defaults)
 	# Update with all cookies
